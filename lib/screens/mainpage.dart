@@ -11,6 +11,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tour_guide_metaverse/brand_colors.dart';
 import 'package:tour_guide_metaverse/screens/search_page/searchPage.dart';
+import 'package:tour_guide_metaverse/screens/tourVariables.dart';
 import 'package:tour_guide_metaverse/shared/constants/constants.dart';
 import 'package:tour_guide_metaverse/shared/data_models/directionDetails.dart';
 import 'package:tour_guide_metaverse/shared/data_models/nearbyTour.dart';
@@ -18,6 +19,8 @@ import 'package:tour_guide_metaverse/shared/data_provider/appdata.dart';
 import 'package:tour_guide_metaverse/shared/helpers/fireHelper.dart';
 import 'package:tour_guide_metaverse/shared/helpers/helperMethods.dart';
 import 'package:tour_guide_metaverse/shared/reusable_components/BrandDivider.dart';
+import 'package:tour_guide_metaverse/shared/reusable_components/CollectPaymentDialog.dart';
+import 'package:tour_guide_metaverse/shared/reusable_components/NoDriverDialog.dart';
 import 'package:tour_guide_metaverse/shared/reusable_components/progressDialog.dart';
 import 'package:tour_guide_metaverse/shared/reusable_components/tourButton.dart';
 import 'package:tour_guide_metaverse/shared/styles/styles.dart';
@@ -36,6 +39,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   double searchSheetHeight = (Platform.isIOS) ? 300.0 : 275.0;
   double rideDetailsSheetHeight = 0; //(Platform.isAndroid) ? 300.0 : 275.0;
   double reuestingSheetHeight = 0; //(Platform.isAndroid) ? 300.0 : 275.0;
+  double tripSheetHeight = 0; //(Platform.isAndroid) ? 275.0 : 300.0;
 
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
@@ -55,11 +59,19 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
 
   DirectionDetails? tripDirectionDetails;
 
+  String appState = 'NORMAL';
+
   bool drawerCanopen = true;
 
   DatabaseReference? tourRef;
 
+  StreamSubscription<DatabaseEvent>? rideSubscription;
+
+  List<NearbyTour>? availableTours;
+
   bool nearbyToursKeysLoaded = false;
+
+  bool isRequestingLocationDetails = false;
 
   void setupPositionLocator() async {
     Position position = await Geolocator.getCurrentPosition(
@@ -96,6 +108,14 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       drawerCanopen = true;
 
       createTourRequest();
+    });
+  }
+
+  showTripSheet() {
+    setState(() {
+      reuestingSheetHeight = 0;
+      tripSheetHeight = (Platform.isAndroid) ? 275 : 300;
+      mapBottomPadding = (Platform.isAndroid) ? 280 : 270;
     });
   }
 
@@ -569,7 +589,14 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                             title: 'Request Tour Guide',
                             color: BrandColors.colorGreen,
                             onPressed: () {
+                              setState(() {
+                                appState = 'REQUESTING';
+                              });
                               showRequestingSheet();
+
+                              availableTours = FireHelper.nearbyTourList;
+
+                              findTour();
                             }),
                       ),
                     ],
@@ -579,7 +606,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             ),
           ),
 
-          ///requesting tour
+          ///requesting tour sheet
           Positioned(
             left: 0,
             right: 0,
@@ -665,6 +692,158 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                             fontSize: 12.0,
                           ),
                         ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          ///Trip sheet
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: AnimatedSize(
+              vsync: this,
+              duration: const Duration(milliseconds: 150),
+              curve: Curves.easeIn,
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 15.0,
+                      spreadRadius: 0.5,
+                      offset: Offset(
+                        0.7,
+                        0.7,
+                      ),
+                    ),
+                  ],
+                ),
+                height: tripSheetHeight,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 24.0, vertical: 18.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            tripStatusDisplay,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'Brand-Bold',
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      BrandDivider(),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        tourInfoDetails,
+                        style: TextStyle(color: BrandColors.colorTextLight),
+                      ),
+                      Text(
+                        tourFullName,
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      BrandDivider(),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 50,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular((25))),
+                                  border: Border.all(
+                                    width: 1.0,
+                                    color: BrandColors.colorTextLight,
+                                  ),
+                                ),
+                                child: Icon(Icons.call),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text('Call'),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 50,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular((25))),
+                                  border: Border.all(
+                                    width: 1.0,
+                                    color: BrandColors.colorTextLight,
+                                  ),
+                                ),
+                                child: Icon(Icons.list),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text('Details'),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 50,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular((25))),
+                                  border: Border.all(
+                                    width: 1.0,
+                                    color: BrandColors.colorTextLight,
+                                  ),
+                                ),
+                                child: Icon(Icons.clear_outlined),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text('Cancel'),
+                            ],
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -903,10 +1082,149 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     };
 
     tourRef?.set(tourMap);
+
+    rideSubscription = tourRef!.onValue.listen((event) async {
+      final data = event.snapshot.value as Map;
+      // check for null snapshot
+      if (event.snapshot.value == null) {
+        return;
+      }
+
+      //get tour details
+      if (data['tour_info'] != null) {
+        setState(() {
+          tourInfoDetails = data['tour_info'].toString();
+        });
+      }
+
+      //get tour name
+      if (data['tour_guide_name'] != null) {
+        setState(() {
+          tourFullName = data['tour_guide_name'].toString();
+        });
+      }
+
+      //get tour phone number
+      if (data['tour_guide_phone'] != null) {
+        setState(() {
+          tourPhoneNumber = data['tour_guide_phone'].toString();
+        });
+      }
+
+      // get and use tour location
+      if (data['tour_guide_location'] != null) {
+        double tourLat =
+            double.parse(data['tour_guide_location']['latitude'].toString());
+        double tourLng =
+            double.parse(data['tour_guide_location']['longitude'].toString());
+
+        LatLng tourLocation = LatLng(tourLat, tourLng);
+
+        if (status == 'accepted') {
+          updateToPickup(tourLocation);
+        } else if (status == 'ontrip') {
+          updateToDestination(tourLocation);
+        } else if (status == 'arrived') {
+          setState(() {
+            tripStatusDisplay = 'Tour Guide has Arrived';
+          });
+        }
+      }
+
+      if (data['status'] != null) {
+        status = data['status'].toString();
+      }
+
+      if (status == 'accepted') {
+        showTripSheet();
+        Geofire.stopListener();
+        removeGeofireMarkers();
+      }
+
+      if (status == 'ended') {
+        if (data['fares'] != null) {
+          int fares = int.parse(data['fares'].toString());
+
+          var response = await showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (BuildContext context) => CollectPayment(
+              paymentMethod: 'cash',
+              fares: fares,
+            ),
+          );
+
+          if (response == 'close') {
+            tourRef?.onDisconnect();
+            tourRef = null;
+            rideSubscription?.cancel();
+            rideSubscription = null;
+            resetApp();
+          }
+        }
+      }
+    });
+  }
+
+  void removeGeofireMarkers() {
+    setState(() {
+      _markers.removeWhere((m) => m.markerId.value.contains('tour'));
+    });
+  }
+
+  void updateToPickup(LatLng tourLocation) async {
+    if (!isRequestingLocationDetails) {
+      isRequestingLocationDetails = true;
+      var positionLatLng =
+          LatLng(currentPosition.latitude, currentPosition.longitude);
+
+      var thisDetails =
+          await HelperMethods.getDirectionDetails(tourLocation, positionLatLng);
+
+      if (thisDetails == null) {
+        return;
+      }
+
+      setState(() {
+        tripStatusDisplay =
+            'Tour Guide is Arriving - ${thisDetails.durtionText}';
+      });
+
+      isRequestingLocationDetails = false;
+    }
+  }
+
+  void updateToDestination(LatLng tourLocation) async {
+    if (!isRequestingLocationDetails) {
+      isRequestingLocationDetails = true;
+
+      var destination =
+          Provider.of<AppData>(context, listen: false).destinationAddress;
+
+      var destinationLatLng =
+          LatLng(destination!.latitude!, destination.longitude!);
+
+      var thisDetails = await HelperMethods.getDirectionDetails(
+          tourLocation, destinationLatLng);
+
+      if (thisDetails == null) {
+        return;
+      }
+
+      setState(() {
+        tripStatusDisplay =
+            'Driving to Destination - ${thisDetails.durtionText}';
+      });
+
+      isRequestingLocationDetails = false;
+    }
   }
 
   void cancelRequest() {
     tourRef?.remove();
+    setState(() {
+      appState = 'NORMAL';
+    });
   }
 
   resetApp() {
@@ -917,10 +1235,96 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       _circles.clear();
       rideDetailsSheetHeight = 0;
       reuestingSheetHeight = 0;
+      tripSheetHeight = 0;
       searchSheetHeight = (Platform.isAndroid) ? 275.0 : 300.0;
       mapBottomPadding = (Platform.isAndroid) ? 275.0 : 300.0;
       drawerCanopen = true;
+
+      status = '';
+      tourFullName = '';
+      tourPhoneNumber = '';
+      tourInfoDetails = '';
+      tripStatusDisplay = 'Tour Guide is Arriving';
     });
     setupPositionLocator();
+  }
+
+  void noTourFound() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) => NoDriverDialog(),
+    );
+  }
+
+  void findTour() {
+    if (availableTours?.length == 0) {
+      cancelRequest();
+      resetApp();
+      noTourFound();
+      // no Tour
+      return;
+    }
+    var tour = availableTours![0];
+
+    notifyTour(tour);
+
+    availableTours?.removeAt(0);
+
+    print(tour.key);
+  }
+
+  void notifyTour(NearbyTour tour) {
+    DatabaseReference tourTripRef =
+        FirebaseDatabase.instance.ref().child('tourGuides/${tour.key}/newtrip');
+    tourTripRef.set(tourRef?.key);
+
+    // get and notify Tour guide using token
+    DatabaseReference tokenRef =
+        FirebaseDatabase.instance.ref().child('tourGuides/${tour.key}/token');
+    tokenRef.once().then((DatabaseEvent databaseEvent) {
+      if (databaseEvent.snapshot.value != null) {
+        String token = databaseEvent.snapshot.value.toString();
+        //send notification to selected tour
+        HelperMethods.sendNotification(token, context, tourRef!.key!);
+      } else {
+        return;
+      }
+
+      const oneSecTick = Duration(seconds: 1);
+
+      var timer = Timer.periodic(oneSecTick, (timer) {
+        // stop timer when tour request is cancelled
+        if (appState != 'REQUESTING') {
+          tourTripRef.set('cancelled');
+          tourTripRef.onDisconnect();
+          timer.cancel();
+          tourRequestTimeout = 30;
+        }
+
+        tourRequestTimeout--;
+
+        // a value event listener for tour accepting tour trip request
+        tourTripRef.onValue.listen((event) {
+          // confirm that tour has clicked accepted for new trip request
+          if (event.snapshot.value.toString() == 'accepted') {
+            tourTripRef.onDisconnect();
+            timer.cancel();
+            tourRequestTimeout = 30;
+          }
+        });
+
+        if (tourRequestTimeout == 0) {
+          //informs tour that ride has timeout
+          tourTripRef.set('timeout');
+          tourTripRef.onDisconnect();
+          tourRequestTimeout = 30;
+          timer.cancel();
+
+          // select the next closest tour
+          findTour();
+        }
+      });
+    });
   }
 }

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -5,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:tour_guide_metaverse/shared/constants/constants.dart';
 import 'package:tour_guide_metaverse/shared/data_models/address.dart';
@@ -20,7 +22,7 @@ class HelperMethods {
     String? userid = currentFirebaseUser?.uid;
 
     DatabaseReference userRef =
-        FirebaseDatabase.instance.ref().child('users/$userid');
+    FirebaseDatabase.instance.ref().child('users/$userid');
 
     userRef.once().then((DatabaseEvent databaseEvent) {
       if (databaseEvent.snapshot.value != null) {
@@ -53,8 +55,7 @@ class HelperMethods {
     return placeAddress;
   }
 
-  static Future<DirectionDetails?> getDirectionDetails(
-      LatLng startPosition, LatLng endPosition) async {
+  static Future<DirectionDetails?> getDirectionDetails(LatLng startPosition, LatLng endPosition) async {
     String url =
         'https://maps.googleapis.com/maps/api/directions/json?origin=${startPosition.latitude},${startPosition.longitude}&destination=${endPosition.latitude},${endPosition.longitude}&mode=driving&key=$mapKey';
 
@@ -67,17 +68,17 @@ class HelperMethods {
     DirectionDetails directionDetails = DirectionDetails();
 
     directionDetails.distanceText =
-        response['routes'][0]['legs'][0]['distance']['text'];
+    response['routes'][0]['legs'][0]['distance']['text'];
     directionDetails.distanceValue =
-        response['routes'][0]['legs'][0]['distance']['value'];
+    response['routes'][0]['legs'][0]['distance']['value'];
 
     directionDetails.durtionText =
-        response['routes'][0]['legs'][0]['duration']['text'];
+    response['routes'][0]['legs'][0]['duration']['text'];
     directionDetails.durtionValue =
-        response['routes'][0]['legs'][0]['duration']['value'];
+    response['routes'][0]['legs'][0]['duration']['value'];
 
     directionDetails.encodedPoints =
-        response['routes'][0]['overview_polyline']['points'];
+    response['routes'][0]['overview_polyline']['points'];
 
     return directionDetails;
   }
@@ -101,5 +102,45 @@ class HelperMethods {
     int radInt = randomGenerator.nextInt(max);
 
     return radInt.toDouble();
+  }
+
+  static sendNotification(String token, context, String ride_id) async {
+    var destination = Provider.of<AppData>(
+      context,
+      listen: false,
+    ).destinationAddress;
+
+    Map<String, String> headerMap = {
+      'Content-Type': 'application/json',
+      'Authorization': serverKey,
+    };
+
+    Map notificationMap = {
+      'title': 'NEW TRIP REQUEST',
+      'body': 'Destination, ${destination?.placeName}',
+    };
+
+    Map dataMap = {
+      'click_action': 'FLUTTER_NOTIFICATION_CLICK',
+      'id': '1',
+      'status': 'done',
+      'ride_id': ride_id,
+    };
+
+    Map bodyMap = {
+      'notification': notificationMap,
+      'priority': 'high',
+      'data': dataMap,
+      'to': token,
+    };
+
+    var url = Uri.parse('https://fcm.googleapis.com/fcm/send');
+    var responce = await http.post(
+      url,
+      headers: headerMap,
+      body: json.encode(bodyMap),
+    );
+
+    print(responce.body);
   }
 }
