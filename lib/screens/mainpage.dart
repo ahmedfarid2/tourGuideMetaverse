@@ -10,6 +10,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tour_guide_metaverse/brand_colors.dart';
+import 'package:tour_guide_metaverse/screens/history_page/historypage.dart';
 import 'package:tour_guide_metaverse/screens/search_page/searchPage.dart';
 import 'package:tour_guide_metaverse/screens/tourVariables.dart';
 import 'package:tour_guide_metaverse/shared/constants/constants.dart';
@@ -21,6 +22,7 @@ import 'package:tour_guide_metaverse/shared/helpers/helperMethods.dart';
 import 'package:tour_guide_metaverse/shared/reusable_components/BrandDivider.dart';
 import 'package:tour_guide_metaverse/shared/reusable_components/CollectPaymentDialog.dart';
 import 'package:tour_guide_metaverse/shared/reusable_components/NoDriverDialog.dart';
+import 'package:tour_guide_metaverse/shared/reusable_components/callSheet.dart';
 import 'package:tour_guide_metaverse/shared/reusable_components/progressDialog.dart';
 import 'package:tour_guide_metaverse/shared/reusable_components/tourButton.dart';
 import 'package:tour_guide_metaverse/shared/styles/styles.dart';
@@ -144,6 +146,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     // TODO: implement initState
     super.initState();
     HelperMethods.getCurrentUserInfo();
+    HelperMethods.getHistoryInfo(context);
   }
 
   @override
@@ -213,11 +216,17 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                   style: kDrawerItemtyle,
                 ),
               ),
-              ListTile(
-                leading: const Icon(Icons.history),
-                title: Text(
-                  'Tour History',
-                  style: kDrawerItemtyle,
+              InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HistoryPage()));
+                },
+                child: ListTile(
+                  leading: const Icon(Icons.history),
+                  title: Text(
+                    'Tour History',
+                    style: kDrawerItemtyle,
+                  ),
                 ),
               ),
               ListTile(
@@ -307,7 +316,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             right: 0,
             bottom: 0,
             child: AnimatedSize(
-              vsync: this,
+              // vsync: this,
               duration: const Duration(milliseconds: 150),
               curve: Curves.easeIn,
               child: Container(
@@ -479,7 +488,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             right: 0,
             bottom: 0,
             child: AnimatedSize(
-              vsync: this,
+              // vsync: this,
               duration: const Duration(milliseconds: 150),
               child: Container(
                 height: rideDetailsSheetHeight,
@@ -612,7 +621,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             right: 0,
             bottom: 0,
             child: AnimatedSize(
-              vsync: this,
+              // vsync: this,
               duration: const Duration(milliseconds: 150),
               curve: Curves.easeIn,
               child: Container(
@@ -706,7 +715,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             right: 0,
             bottom: 0,
             child: AnimatedSize(
-              vsync: this,
+              // vsync: this,
               duration: const Duration(milliseconds: 150),
               curve: Curves.easeIn,
               child: Container(
@@ -777,28 +786,41 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular((25))),
-                                  border: Border.all(
-                                    width: 1.0,
-                                    color: BrandColors.colorTextLight,
+                          Builder(builder: (context) {
+                            return InkWell(
+                              onTap: () {
+                                showBottomSheet(
+                                  context: context,
+                                  builder: (BuildContext context) => CallSheet(
+                                    title: 'Phone: $tourPhoneNumber',
+                                    onPressed: () {},
                                   ),
-                                ),
-                                child: Icon(Icons.call),
+                                );
+                              },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    height: 50,
+                                    width: 50,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular((25))),
+                                      border: Border.all(
+                                        width: 1.0,
+                                        color: BrandColors.colorTextLight,
+                                      ),
+                                    ),
+                                    child: Icon(Icons.call),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text('Call'),
+                                ],
                               ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text('Call'),
-                            ],
-                          ),
+                            );
+                          }),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
@@ -821,27 +843,33 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                               Text('Details'),
                             ],
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular((25))),
-                                  border: Border.all(
-                                    width: 1.0,
-                                    color: BrandColors.colorTextLight,
+                          InkWell(
+                            onTap: () {
+                              cancelRequest();
+                              resetApp();
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 50,
+                                  width: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular((25))),
+                                    border: Border.all(
+                                      width: 1.0,
+                                      color: BrandColors.colorTextLight,
+                                    ),
                                   ),
+                                  child: Icon(Icons.clear_outlined),
                                 ),
-                                child: Icon(Icons.clear_outlined),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text('Cancel'),
-                            ],
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text('Cancel'),
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -1311,6 +1339,11 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             tourTripRef.onDisconnect();
             timer.cancel();
             tourRequestTimeout = 30;
+            String? rideID = tourRef?.key;
+            DatabaseReference historyRef = FirebaseDatabase.instance
+                .ref()
+                .child('users/${currentFirebaseUser!.uid}/history/$rideID');
+            historyRef.set(true);
           }
         });
 

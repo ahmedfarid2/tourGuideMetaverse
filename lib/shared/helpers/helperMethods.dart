@@ -7,10 +7,12 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:tour_guide_metaverse/shared/constants/constants.dart';
 import 'package:tour_guide_metaverse/shared/data_models/address.dart';
 import 'package:tour_guide_metaverse/shared/data_models/directionDetails.dart';
+import 'package:tour_guide_metaverse/shared/data_models/history.dart';
 import 'package:tour_guide_metaverse/shared/data_provider/appdata.dart';
 import 'package:tour_guide_metaverse/shared/helpers/requesthelper.dart';
 
@@ -142,5 +144,51 @@ class HelperMethods {
     );
 
     print(responce.body);
+  }
+
+  static void getHistoryInfo(context) {
+    DatabaseReference historyRef = FirebaseDatabase.instance
+        .ref()
+        .child('users/${currentFirebaseUser!.uid}/history');
+
+    historyRef.once().then((DatabaseEvent databaseEvent) {
+      if (databaseEvent.snapshot.value != null) {
+        final data = databaseEvent.snapshot.value as Map;
+        List<String> tripHistoryKeys = [];
+        data.forEach((key, value) {
+          tripHistoryKeys.add(key);
+        });
+        // update trip keys to data provider
+        Provider.of<AppData>(context, listen: false)
+            .updateTripKeys(tripHistoryKeys);
+
+        getHistoryData(context);
+      }
+    });
+  }
+
+  static void getHistoryData(context) {
+    List<String> keys =
+        Provider.of<AppData>(context, listen: false).tripHistoryKeys;
+    for (String key in keys) {
+      DatabaseReference historyRef =
+          FirebaseDatabase.instance.ref().child('tourRequest/$key');
+      historyRef.once().then((DatabaseEvent databaseEvent) {
+        if (databaseEvent.snapshot.value != null) {
+          var history = History.fromSnapshot(databaseEvent);
+          Provider.of<AppData>(context, listen: false)
+              .updateTripHistory(history);
+          print(history.pickup);
+        }
+      });
+    }
+  }
+
+  static String formatMyDate(String datestring) {
+    DateTime thisDate = DateTime.parse(datestring);
+    String formattedDate =
+        '${DateFormat.MMMd().format(thisDate)}, ${DateFormat.y().format(thisDate)} - ${DateFormat.jm().format(thisDate)}';
+
+    return formattedDate;
   }
 }

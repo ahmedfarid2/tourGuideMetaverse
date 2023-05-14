@@ -4,10 +4,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tour_guide_metaverse/screens/history_page/historypage.dart';
 import 'package:tour_guide_metaverse/screens/login_screen/login_screen.dart';
 import 'package:tour_guide_metaverse/screens/mainpage.dart';
 import 'package:tour_guide_metaverse/screens/register_screen/register_screen.dart';
 import 'package:tour_guide_metaverse/screens/search_page/searchPage.dart';
+import 'package:tour_guide_metaverse/screens/toursim_page/tourism_page.dart';
 import 'package:tour_guide_metaverse/shared/constants/constants.dart';
 import 'package:tour_guide_metaverse/shared/data_provider/appdata.dart';
 
@@ -36,16 +38,18 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: 'Brand-Regular',
-          primarySwatch: Colors.blue,
+          primaryColor: Color(0xFFE5BA73),
         ),
         initialRoute: (currentFirebaseUser == null)
             ? LoginScreen.routeName
-            : MainPage.routeName,
+            : TourismPage.routeName,
         routes: {
           RegisterScreen.routeName: (context) => const RegisterScreen(),
           LoginScreen.routeName: (context) => LoginScreen(),
           MainPage.routeName: (context) => const MainPage(),
           SearchPage.routeName: (context) => const SearchPage(),
+          HistoryPage.routeName: (context) => const HistoryPage(),
+          TourismPage.routeName: (context) => const TourismPage(),
         },
       ),
     );

@@ -90,16 +90,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Column(
               children: [
                 const SizedBox(
-                  height: 100.0,
+                  height: 50.0,
                 ),
                 const Image(
                   alignment: Alignment.center,
-                  width: 100.0,
-                  height: 100.0,
+                  width: 150.0,
+                  height: 150.0,
                   image: AssetImage("assets/images/logo.png"),
                 ),
                 const SizedBox(
-                  height: 40.0,
+                  height: 5.0,
                 ),
                 const Text(
                   "Create a Tourist's Account",
