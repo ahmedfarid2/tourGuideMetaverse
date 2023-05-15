@@ -39,7 +39,7 @@ class _TourismPageState extends State<TourismPage> {
                 fontFamily: 'Brand-Bold',
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
-                color: Color(0xFFC58940),
+                color: Colors.orange[900],
               ),
             ),
           ],
@@ -58,7 +58,7 @@ class _TourismPageState extends State<TourismPage> {
         },
         showUnselectedLabels: false,
         selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
-        selectedItemColor: Color(0xFFC58940),
+        selectedItemColor: Colors.orange[900],
         items: [
           BottomNavigationBarItem(
             icon: Icon(

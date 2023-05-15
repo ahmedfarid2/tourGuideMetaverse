@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: 'Brand-Regular',
-          primaryColor: Color(0xFFE5BA73),
+          primaryColor: Colors.orange[900],
         ),
         initialRoute: (currentFirebaseUser == null)
             ? FirstIntro.routeName

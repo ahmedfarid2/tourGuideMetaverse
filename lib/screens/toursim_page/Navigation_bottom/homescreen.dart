@@ -28,8 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
           flex: 1,
           child: NavigationRail(
             selectedLabelTextStyle: TextStyle(
-              color: Color(0xFFC58940),
-              fontSize: 20,
+              color: Colors.orange[900],
+              fontSize: 17,
               fontFamily: 'Brand-Bold',
             ),
             unselectedLabelTextStyle: TextStyle(

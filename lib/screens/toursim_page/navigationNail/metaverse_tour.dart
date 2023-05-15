@@ -46,7 +46,7 @@ class METAVERSE extends StatelessWidget {
                       child: Icon(Icons.arrow_forward),
                       style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all(Color(0xFFC58940)),
+                            MaterialStateProperty.all(Colors.orange[900]),
                       ),
                     ),
                   ),
@@ -99,7 +99,7 @@ class METAVERSE extends StatelessWidget {
                       child: Icon(Icons.arrow_forward),
                       style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all(Color(0xFFC58940)),
+                            MaterialStateProperty.all(Colors.orange[900]),
                       ),
                     ),
                   ),
