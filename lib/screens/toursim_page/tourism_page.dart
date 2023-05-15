@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tour_guide_metaverse/screens/toursim_page/CHATGPT.dart';
-import 'package:tour_guide_metaverse/screens/toursim_page/OFFLINE.dart';
-
-import 'metaverse_tour.dart';
+import 'package:tour_guide_metaverse/screens/toursim_page/Navigation_bottom/homescreen.dart';
+import 'package:tour_guide_metaverse/screens/toursim_page/Navigation_bottom/profilescreen.dart';
 
 class TourismPage extends StatefulWidget {
   const TourismPage({Key? key}) : super(key: key);
@@ -14,11 +12,9 @@ class TourismPage extends StatefulWidget {
 
 class _TourismPageState extends State<TourismPage> {
   int index = 0;
-  int _selectedIndex = 0;
-  final _pages = [
-    METAVERSE(),
-    CHATGPT(),
-    OFFLINE(),
+  final _pagebottom = [
+    HomeScreen(),
+    ProfileScreen(),
   ];
 
   @override
@@ -50,72 +46,7 @@ class _TourismPageState extends State<TourismPage> {
         ),
       ),
       backgroundColor: Colors.white,
-      body: Row(
-        children: [
-          Expanded(
-            flex: 1,
-            child: NavigationRail(
-              selectedLabelTextStyle: TextStyle(
-                color: Color(0xFFC58940),
-                fontSize: 20,
-                fontFamily: 'Brand-Bold',
-              ),
-              unselectedLabelTextStyle: TextStyle(
-                color: Colors.black,
-                fontSize: 15,
-                fontFamily: 'Brand-Bold',
-              ),
-              trailing: Padding(
-                padding: const EdgeInsets.only(top: 30.0),
-              ),
-              labelType: NavigationRailLabelType.all,
-              selectedIndex: _selectedIndex,
-              onDestinationSelected: (index) {
-                setState(() {
-                  _selectedIndex = index;
-                });
-              },
-              destinations: [
-                NavigationRailDestination(
-                  icon: const Icon(null),
-                  label: RotatedBox(
-                    quarterTurns: 3,
-                    child: Text(
-                      'MeTAVERSE',
-                    ),
-                  ),
-                ),
-                NavigationRailDestination(
-                  icon: const Icon(null),
-                  label: RotatedBox(
-                    quarterTurns: 3,
-                    child: Text(
-                      'TOUR OFFLINE',
-                    ),
-                  ),
-                ),
-                NavigationRailDestination(
-                  icon: const Icon(null),
-                  label: RotatedBox(
-                    quarterTurns: 3,
-                    child: Text(
-                      'GAME',
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            flex: 6,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              physics: PageScrollPhysics(),
-              child: _pages[_selectedIndex],
-            ),
-          ),
-        ],
-      ),
+      body: _pagebottom[index],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: index,
         elevation: 0.0,
@@ -137,9 +68,9 @@ class _TourismPageState extends State<TourismPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.settings_outlined,
+              Icons.person_2_outlined,
             ),
-            label: 'SETTINGS',
+            label: 'PROFILE',
           ),
         ],
       ),

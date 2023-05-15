@@ -4,8 +4,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tour_guide_metaverse/brand_colors.dart';
-import 'package:tour_guide_metaverse/screens/mainpage.dart';
 import 'package:tour_guide_metaverse/screens/register_screen/register_screen.dart';
+import 'package:tour_guide_metaverse/screens/toursim_page/tourism_page.dart';
 import 'package:tour_guide_metaverse/shared/reusable_components/progressDialog.dart';
 import 'package:tour_guide_metaverse/shared/reusable_components/tourButton.dart';
 
@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
       userRef.once().then((DatabaseEvent databaseEvent) {
         if (databaseEvent.snapshot.value != null) {
           Navigator.pushNamedAndRemoveUntil(
-              context, MainPage.routeName, (route) => false);
+              context, TourismPage.routeName, (route) => false);
         }
       });
     }

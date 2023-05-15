@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tour_guide_metaverse/screens/mainpage.dart';
 
-class METAVERSE extends StatelessWidget {
+class OFFLINE extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -29,7 +30,7 @@ class METAVERSE extends StatelessWidget {
                     child: Container(
                       width: 250,
                       child: Text(
-                        'metaverse pharoh metaverse pharoh metaverse pharoh metaverse pharoh',
+                        'Are you inside EGYPT!? have offline tour with a tour guide in any place all over egypt fast time high quality, safety.',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -42,7 +43,10 @@ class METAVERSE extends StatelessWidget {
                     padding:
                         const EdgeInsets.only(right: 20, bottom: 30, left: 20),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, MainPage.routeName, (route) => false);
+                      },
                       child: Icon(Icons.arrow_forward),
                       style: ButtonStyle(
                         backgroundColor:
@@ -82,7 +86,7 @@ class METAVERSE extends StatelessWidget {
                     child: Container(
                       width: 250,
                       child: Text(
-                        'metaverse pharoh metaverse pharoh metaverse pharoh metaverse pharoh',
+                        'Are you inside EGYPT!? have offline tour with a tour guide in any place all over egypt fast time high quality, safety.',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,

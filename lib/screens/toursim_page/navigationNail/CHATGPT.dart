@@ -29,7 +29,7 @@ class CHATGPT extends StatelessWidget {
                     child: Container(
                       width: 250,
                       child: Text(
-                        'metaverse pharoh metaverse pharoh metaverse pharoh metaverse pharoh',
+                        'Play a game and try the metaverse experience without headset.',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -82,7 +82,7 @@ class CHATGPT extends StatelessWidget {
                     child: Container(
                       width: 250,
                       child: Text(
-                        'metaverse pharoh metaverse pharoh metaverse pharoh metaverse pharoh',
+                        'Play a game and try the metaverse experience without headset.',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,

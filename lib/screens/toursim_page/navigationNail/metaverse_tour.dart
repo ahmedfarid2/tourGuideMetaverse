@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class OFFLINE extends StatelessWidget {
+class METAVERSE extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -29,7 +29,7 @@ class OFFLINE extends StatelessWidget {
                     child: Container(
                       width: 250,
                       child: Text(
-                        'metaverse pharoh metaverse pharoh metaverse pharoh metaverse pharoh',
+                        'Have a virtual tour inside the Metaverse with a tour guide.',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -66,7 +66,7 @@ class OFFLINE extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(40),
                 child: Image.asset(
-                  'assets/images/meta1.jpeg',
+                  'assets/images/meta2.jpeg',
                   height: 630,
                   width: 300,
                   fit: BoxFit.cover,
@@ -82,7 +82,7 @@ class OFFLINE extends StatelessWidget {
                     child: Container(
                       width: 250,
                       child: Text(
-                        'metaverse pharoh metaverse pharoh metaverse pharoh metaverse pharoh',
+                        'Have a virtual tour inside the Metaverse with a tour guide.',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,

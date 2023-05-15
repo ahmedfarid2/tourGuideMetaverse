@@ -5,6 +5,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tour_guide_metaverse/screens/history_page/historypage.dart';
+import 'package:tour_guide_metaverse/screens/intro_app/first_intro.dart';
+import 'package:tour_guide_metaverse/screens/intro_app/second_intro.dart';
+import 'package:tour_guide_metaverse/screens/intro_app/third_intro.dart';
 import 'package:tour_guide_metaverse/screens/login_screen/login_screen.dart';
 import 'package:tour_guide_metaverse/screens/mainpage.dart';
 import 'package:tour_guide_metaverse/screens/register_screen/register_screen.dart';
@@ -41,7 +44,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Color(0xFFE5BA73),
         ),
         initialRoute: (currentFirebaseUser == null)
-            ? LoginScreen.routeName
+            ? FirstIntro.routeName
             : TourismPage.routeName,
         routes: {
           RegisterScreen.routeName: (context) => const RegisterScreen(),
@@ -50,6 +53,9 @@ class MyApp extends StatelessWidget {
           SearchPage.routeName: (context) => const SearchPage(),
           HistoryPage.routeName: (context) => const HistoryPage(),
           TourismPage.routeName: (context) => const TourismPage(),
+          FirstIntro.routeName: (context) => const FirstIntro(),
+          SecondIntro.routeName: (context) => const SecondIntro(),
+          ThirdIntro.routeName: (context) => const ThirdIntro(),
         },
       ),
     );

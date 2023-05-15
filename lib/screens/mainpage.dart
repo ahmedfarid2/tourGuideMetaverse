@@ -10,9 +10,14 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tour_guide_metaverse/brand_colors.dart';
+import 'package:tour_guide_metaverse/screens/about.dart';
+import 'package:tour_guide_metaverse/screens/freetour.dart';
 import 'package:tour_guide_metaverse/screens/history_page/historypage.dart';
+import 'package:tour_guide_metaverse/screens/payments.dart';
 import 'package:tour_guide_metaverse/screens/search_page/searchPage.dart';
+import 'package:tour_guide_metaverse/screens/support.dart';
 import 'package:tour_guide_metaverse/screens/tourVariables.dart';
+import 'package:tour_guide_metaverse/screens/toursim_page/tourism_page.dart';
 import 'package:tour_guide_metaverse/shared/constants/constants.dart';
 import 'package:tour_guide_metaverse/shared/data_models/directionDetails.dart';
 import 'package:tour_guide_metaverse/shared/data_models/nearbyTour.dart';
@@ -182,7 +187,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text(
                             "Ahmed Farid",
                             style: TextStyle(
@@ -191,7 +196,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                           SizedBox(
                             height: 6.0,
                           ),
-                          Text("View profile"),
                         ],
                       ),
                     ],
@@ -202,18 +206,30 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               const SizedBox(
                 height: 10.0,
               ),
-              ListTile(
-                leading: const Icon(Icons.card_giftcard),
-                title: Text(
-                  'Free Tour',
-                  style: kDrawerItemtyle,
+              InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => FreeTour()));
+                },
+                child: ListTile(
+                  leading: const Icon(Icons.card_giftcard),
+                  title: Text(
+                    'Free Tour',
+                    style: kDrawerItemtyle,
+                  ),
                 ),
               ),
-              ListTile(
-                leading: const Icon(Icons.credit_card),
-                title: Text(
-                  'Payments',
-                  style: kDrawerItemtyle,
+              InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Payments()));
+                },
+                child: ListTile(
+                  leading: const Icon(Icons.credit_card),
+                  title: Text(
+                    'Payments',
+                    style: kDrawerItemtyle,
+                  ),
                 ),
               ),
               InkWell(
@@ -229,18 +245,30 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                   ),
                 ),
               ),
-              ListTile(
-                leading: const Icon(Icons.contact_support_outlined),
-                title: Text(
-                  'Support',
-                  style: kDrawerItemtyle,
+              InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Support()));
+                },
+                child: ListTile(
+                  leading: const Icon(Icons.contact_support_outlined),
+                  title: Text(
+                    'Support',
+                    style: kDrawerItemtyle,
+                  ),
                 ),
               ),
-              ListTile(
-                leading: const Icon(Icons.info_outline),
-                title: Text(
-                  'About',
-                  style: kDrawerItemtyle,
+              InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => About()));
+                },
+                child: ListTile(
+                  leading: const Icon(Icons.info_outline),
+                  title: Text(
+                    'About',
+                    style: kDrawerItemtyle,
+                  ),
                 ),
               ),
             ],
@@ -268,6 +296,43 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               });
               setupPositionLocator();
             },
+          ),
+
+          ///back to the tourism
+          Positioned(
+            top: 100.0,
+            left: 20.0,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, TourismPage.routeName, (route) => false);
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 5.0,
+                      spreadRadius: 0.5,
+                      offset: Offset(
+                        0.7,
+                        0.7,
+                      ),
+                    ),
+                  ],
+                ),
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: 20.0,
+                  child: Icon(
+                    Icons.home_outlined,
+                    color: Colors.black87,
+                  ),
+                ),
+              ),
+            ),
           ),
 
           ///menu button
