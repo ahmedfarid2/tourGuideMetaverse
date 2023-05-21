@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tour_guide_metaverse/screens/login_screen/login_screen.dart';
+import 'package:tour_guide_metaverse/shared/constants/constants.dart';
+import 'package:tour_guide_metaverse/shared/data_provider/appdata.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -29,25 +32,27 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 16),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'John Doe',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              currentUserInfo!.fullName!,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24,
+                                  overflow: TextOverflow.ellipsis),
                             ),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            'johndoe@example.com',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey[600],
+                            SizedBox(height: 8),
+                            Text(
+                              currentUserInfo!.email!,
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey[600],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -72,7 +77,8 @@ class ProfileScreen extends StatelessWidget {
                         Column(
                           children: [
                             Text(
-                              '34',
+                              (Provider.of<AppData>(context).tripHistory.length)
+                                  .toString(),
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
@@ -80,7 +86,7 @@ class ProfileScreen extends StatelessWidget {
                             ),
                             SizedBox(height: 4),
                             Text(
-                              'Trips',
+                              'Tours',
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey[600],
@@ -157,7 +163,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       SizedBox(width: 16),
                       Text(
-                        'John Doe',
+                        currentUserInfo!.fullName!,
                         style: TextStyle(
                           fontSize: 16,
                           color: Colors.grey[600],
@@ -171,7 +177,7 @@ class ProfileScreen extends StatelessWidget {
                       Icon(Icons.email, color: Colors.grey[600]),
                       SizedBox(width: 16),
                       Text(
-                        'johndoe@example.com',
+                        currentUserInfo!.email!,
                         style: TextStyle(
                           fontSize: 16,
                           color: Colors.grey[600],
@@ -185,7 +191,7 @@ class ProfileScreen extends StatelessWidget {
                       Icon(Icons.phone, color: Colors.grey[600]),
                       SizedBox(width: 16),
                       Text(
-                        '+1 123 456 7890',
+                        currentUserInfo!.phone!,
                         style: TextStyle(
                           fontSize: 16,
                           color: Colors.grey[600],
@@ -274,7 +280,7 @@ class ProfileScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.all(16),
                     child: Text(
-                      'Upcoming Trips',
+                      'Upcoming Tours',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -284,8 +290,8 @@ class ProfileScreen extends StatelessWidget {
                   Card(
                     child: ListTile(
                       leading: Icon(Icons.location_on),
-                      title: Text('Trip to Tokyo'),
-                      subtitle: Text('July 1 - July 7, 2023'),
+                      title: Text('Tour to Pyramids'),
+                      subtitle: Text('July 1, 2023'),
                       trailing: Icon(Icons.arrow_forward_ios),
                       onTap: () {
                         // TODO: Implement trip details screen.
@@ -297,18 +303,28 @@ class ProfileScreen extends StatelessWidget {
             ),
             SizedBox(height: 16),
             Center(
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(Colors.orange[900]),
+              child: SizedBox(
+                width: 150,
+                height: 50,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.orange[900]),
+                  ),
+                  child: Text(
+                    'Log out',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  onPressed: () {
+                    // TODO: Implement logout functionality.
+                    FirebaseAuth.instance.signOut();
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, LoginScreen.routeName, (route) => false);
+                  },
                 ),
-                child: Text('Log out'),
-                onPressed: () {
-                  // TODO: Implement logout functionality.
-                  FirebaseAuth.instance.signOut();
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, LoginScreen.routeName, (route) => false);
-                },
               ),
             ),
             SizedBox(height: 16),

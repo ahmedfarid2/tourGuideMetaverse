@@ -17,7 +17,6 @@ import 'package:tour_guide_metaverse/screens/payments.dart';
 import 'package:tour_guide_metaverse/screens/search_page/searchPage.dart';
 import 'package:tour_guide_metaverse/screens/support.dart';
 import 'package:tour_guide_metaverse/screens/tourVariables.dart';
-import 'package:tour_guide_metaverse/screens/toursim_page/tourism_page.dart';
 import 'package:tour_guide_metaverse/shared/constants/constants.dart';
 import 'package:tour_guide_metaverse/shared/data_models/directionDetails.dart';
 import 'package:tour_guide_metaverse/shared/data_models/nearbyTour.dart';
@@ -27,10 +26,12 @@ import 'package:tour_guide_metaverse/shared/helpers/helperMethods.dart';
 import 'package:tour_guide_metaverse/shared/reusable_components/BrandDivider.dart';
 import 'package:tour_guide_metaverse/shared/reusable_components/CollectPaymentDialog.dart';
 import 'package:tour_guide_metaverse/shared/reusable_components/NoDriverDialog.dart';
+import 'package:tour_guide_metaverse/shared/reusable_components/TourOutlineButton.dart';
 import 'package:tour_guide_metaverse/shared/reusable_components/callSheet.dart';
 import 'package:tour_guide_metaverse/shared/reusable_components/progressDialog.dart';
 import 'package:tour_guide_metaverse/shared/reusable_components/tourButton.dart';
 import 'package:tour_guide_metaverse/shared/styles/styles.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -150,8 +151,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   void initState() {
     // TODO: implement initState
     super.initState();
-    HelperMethods.getCurrentUserInfo();
-    HelperMethods.getHistoryInfo(context);
+    // HelperMethods.getCurrentUserInfo();
   }
 
   @override
@@ -176,27 +176,46 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                   ),
                   child: Row(
                     children: [
-                      Image.asset(
-                        "assets/images/user_icon.png",
-                        height: 60.0,
-                        width: 60.0,
+                      SizedBox(
+                        height: 60,
+                        width: 60,
+                        child: CircleAvatar(
+                          radius: 50.0,
+                          backgroundColor: Colors.grey,
+                          child: Icon(
+                            Icons.person,
+                            size: 35.0,
+                            color: Colors.orange[900],
+                          ),
+                        ),
                       ),
                       const SizedBox(
                         width: 15.0,
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Ahmed Farid",
-                            style: TextStyle(
-                                fontSize: 20.0, fontFamily: "Brand-Bold"),
-                          ),
-                          SizedBox(
-                            height: 6.0,
-                          ),
-                        ],
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              currentUserInfo!.fullName!,
+                              style: TextStyle(
+                                  fontSize: 20.0,
+                                  fontFamily: "Brand-Bold",
+                                  overflow: TextOverflow.ellipsis),
+                            ),
+                            SizedBox(
+                              height: 6.0,
+                            ),
+                            Text(
+                              'Tours ( ${(Provider.of<AppData>(context).tripHistory.length).toString()} )',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey[600],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -304,8 +323,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             left: 20.0,
             child: GestureDetector(
               onTap: () {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, TourismPage.routeName, (route) => false);
+                // Navigator.pushNamedAndRemoveUntil(
+                //     context, TourismPage.routeName, (route) => false);
+                Navigator.pop(context);
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -414,7 +434,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                         style: TextStyle(fontSize: 10.0),
                       ),
                       const Text(
-                        "Get your Tour?",
+                        "Get your Tour Guide?",
                         style:
                             TextStyle(fontSize: 18.0, fontFamily: "Brand-Bold"),
                       ),
@@ -446,15 +466,15 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                           child: Padding(
                             padding: const EdgeInsets.all(12.0),
                             child: Row(
-                              children: const [
+                              children: [
                                 Icon(
                                   Icons.search,
-                                  color: Colors.blueAccent,
+                                  color: Colors.orange[900]!,
                                 ),
                                 SizedBox(
                                   width: 10,
                                 ),
-                                Text("Search Destinition"),
+                                Text("Get Tour Guide"),
                               ],
                             ),
                           ),
@@ -580,7 +600,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                     children: [
                       Container(
                         width: double.infinity,
-                        color: BrandColors.colorAccent1,
+                        color: Colors.orange[50],
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: Row(
@@ -661,7 +681,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: TourButtton(
                             title: 'Request Tour Guide',
-                            color: BrandColors.colorGreen,
+                            color: Colors.orange[900]!,
                             onPressed: () {
                               setState(() {
                                 appState = 'REQUESTING';
@@ -858,7 +878,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                                   context: context,
                                   builder: (BuildContext context) => CallSheet(
                                     title: 'Phone: $tourPhoneNumber',
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      launchUrlString('tel://$tourPhoneNumber');
+                                    },
                                   ),
                                 );
                               },
@@ -886,27 +908,137 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                               ),
                             );
                           }),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular((25))),
-                                  border: Border.all(
-                                    width: 1.0,
-                                    color: BrandColors.colorTextLight,
+                          InkWell(
+                            onTap: () {
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (BuildContext context) => Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black26,
+                                        blurRadius: 15.0,
+                                        spreadRadius: 0.5,
+                                        offset: Offset(
+                                          0.7,
+                                          0.7,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  height: tripSheetHeight,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 24, vertical: 18),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          'Name:',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: BrandColors.colorTextLight,
+                                          ),
+                                        ),
+                                        Text(
+                                          tourFullName,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            fontFamily: 'Brand-Bold',
+                                            color: BrandColors.colorText,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text(
+                                          'Phone',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: BrandColors.colorTextLight,
+                                          ),
+                                        ),
+                                        Text(
+                                          tourPhoneNumber,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            fontFamily: 'Brand-Bold',
+                                            color: BrandColors.colorText,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text(
+                                          'Tour Info',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: BrandColors.colorTextLight,
+                                          ),
+                                        ),
+                                        Text(
+                                          tourInfoDetails,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            fontFamily: 'Brand-Bold',
+                                            color: BrandColors.colorText,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Container(
+                                                child: TourOutlineButton(
+                                                  title: 'BACK',
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  color: BrandColors
+                                                      .colorLightGrayFair,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                                child: Icon(Icons.list),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text('Details'),
-                            ],
+                              );
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 50,
+                                  width: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular((25))),
+                                    border: Border.all(
+                                      width: 1.0,
+                                      color: BrandColors.colorTextLight,
+                                    ),
+                                  ),
+                                  child: Icon(Icons.list),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text('Details'),
+                              ],
+                            ),
                           ),
                           InkWell(
                             onTap: () {

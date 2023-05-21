@@ -44,8 +44,10 @@ class OFFLINE extends StatelessWidget {
                         const EdgeInsets.only(right: 20, bottom: 30, left: 20),
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, MainPage.routeName, (route) => false);
+                        Navigator.pushNamed(
+                          context,
+                          MainPage.routeName,
+                        );
                       },
                       child: Icon(Icons.arrow_forward),
                       style: ButtonStyle(

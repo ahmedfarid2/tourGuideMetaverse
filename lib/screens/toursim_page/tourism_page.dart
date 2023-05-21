@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tour_guide_metaverse/screens/toursim_page/Navigation_bottom/homescreen.dart';
 import 'package:tour_guide_metaverse/screens/toursim_page/Navigation_bottom/profilescreen.dart';
+import 'package:tour_guide_metaverse/shared/helpers/helperMethods.dart';
 
 class TourismPage extends StatefulWidget {
   const TourismPage({Key? key}) : super(key: key);
@@ -16,6 +17,14 @@ class _TourismPageState extends State<TourismPage> {
     HomeScreen(),
     ProfileScreen(),
   ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    HelperMethods.getHistoryInfo(context);
+    HelperMethods.getCurrentUserInfo();
+  }
 
   @override
   Widget build(BuildContext context) {

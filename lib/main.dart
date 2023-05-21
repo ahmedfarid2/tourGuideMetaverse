@@ -4,16 +4,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tour_guide_metaverse/screens/OculusConnectionScreen.dart';
 import 'package:tour_guide_metaverse/screens/history_page/historypage.dart';
 import 'package:tour_guide_metaverse/screens/intro_app/first_intro.dart';
 import 'package:tour_guide_metaverse/screens/intro_app/second_intro.dart';
 import 'package:tour_guide_metaverse/screens/intro_app/third_intro.dart';
 import 'package:tour_guide_metaverse/screens/login_screen/login_screen.dart';
 import 'package:tour_guide_metaverse/screens/mainpage.dart';
+import 'package:tour_guide_metaverse/screens/places_datails/PlaceDetails.dart';
 import 'package:tour_guide_metaverse/screens/register_screen/register_screen.dart';
 import 'package:tour_guide_metaverse/screens/search_page/searchPage.dart';
+import 'package:tour_guide_metaverse/screens/tour_guide_details/tourGuideDetails.dart';
 import 'package:tour_guide_metaverse/screens/toursim_page/tourism_page.dart';
 import 'package:tour_guide_metaverse/shared/constants/constants.dart';
+import 'package:tour_guide_metaverse/shared/data_models/destination_model.dart';
 import 'package:tour_guide_metaverse/shared/data_provider/appdata.dart';
 
 import 'firebase_options.dart';
@@ -34,6 +38,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Destination> popular =
+        destinations.where((element) => element.category == 'popular').toList();
     return ChangeNotifierProvider(
       create: (BuildContext context) => AppData(),
       child: MaterialApp(
@@ -45,7 +51,7 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: (currentFirebaseUser == null)
             ? FirstIntro.routeName
-            : TourismPage.routeName,
+            : PlaceDetailsScreen.routeName,
         routes: {
           RegisterScreen.routeName: (context) => const RegisterScreen(),
           LoginScreen.routeName: (context) => LoginScreen(),
@@ -56,6 +62,12 @@ class MyApp extends StatelessWidget {
           FirstIntro.routeName: (context) => const FirstIntro(),
           SecondIntro.routeName: (context) => const SecondIntro(),
           ThirdIntro.routeName: (context) => const ThirdIntro(),
+          OculusConnectionScreen.routeName: (context) =>
+              OculusConnectionScreen(),
+          TourGuideDetails.routeName: (context) => TourGuideDetails(),
+          PlaceDetailsScreen.routeName: (context) => PlaceDetailsScreen(
+                destination: popular[0],
+              ),
         },
       ),
     );

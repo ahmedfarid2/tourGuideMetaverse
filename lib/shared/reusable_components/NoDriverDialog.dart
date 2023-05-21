@@ -27,7 +27,7 @@ class NoDriverDialog extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                  'No driver found',
+                  'No Tour Guide found',
                   style: TextStyle(fontSize: 22.0, fontFamily: 'Brand-Bold'),
                 ),
                 SizedBox(
@@ -36,7 +36,7 @@ class NoDriverDialog extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
-                    'No available driver close by, we suggest you try again shortly',
+                    'No available Tour Guide close by, we suggest you try again shortly',
                     textAlign: TextAlign.center,
                   ),
                 ),

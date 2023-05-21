@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tour_guide_metaverse/screens/OculusConnectionScreen.dart';
 
 class METAVERSE extends StatelessWidget {
   @override
@@ -42,7 +43,10 @@ class METAVERSE extends StatelessWidget {
                     padding:
                         const EdgeInsets.only(right: 20, bottom: 30, left: 20),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(
+                            context, OculusConnectionScreen.routeName);
+                      },
                       child: Icon(Icons.arrow_forward),
                       style: ButtonStyle(
                         backgroundColor:

@@ -91,7 +91,7 @@ class _SearchPageState extends State<SearchPage> {
                           child: const Icon(Icons.arrow_back_ios)),
                       const Center(
                         child: Text(
-                          "Set Desination",
+                          "Set Tour Desination",
                           style: TextStyle(
                               fontSize: 20.0, fontFamily: 'Brand-Bold'),
                         ),
