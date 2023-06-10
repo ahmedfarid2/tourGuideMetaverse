@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tour_guide_metaverse/screens/intro_app/third_intro.dart';
+import 'package:tour_guide_metaverse/shared/styles/styles.dart';
 
 class SecondIntro extends StatelessWidget {
   const SecondIntro({Key? key}) : super(key: key);
@@ -65,11 +66,11 @@ class SecondIntro extends StatelessWidget {
                     child: Icon(
                       Icons.arrow_forward,
                       size: 35,
+                      color: base,
                       weight: 100,
                     ),
                     style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.orange[900]),
+                      backgroundColor: MaterialStateProperty.all(Colors.yellow),
                     ),
                   ),
                 ),

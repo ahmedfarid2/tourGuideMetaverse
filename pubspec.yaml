@@ -47,6 +47,10 @@ dependencies:
   firebase_auth: ^4.4.0
   firebase_database: ^10.1.0
   flutter_geofire: ^2.0.3
+  sizer: ^2.0.15
+  google_fonts: ^4.0.4
+  sms_autofill: ^2.3.0
+
   #  firebase_messaging: ^14.4.0
 
   #google Map
@@ -83,7 +87,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/Elkarnak/
-    - assets/images/tourguide/
+    - assets/images/TourGuide/
 
   fonts:
     - family: Brand-Bold

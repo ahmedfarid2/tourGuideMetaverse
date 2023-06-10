@@ -24,7 +24,7 @@ class HelperMethods {
     String? userid = currentFirebaseUser?.uid;
 
     DatabaseReference userRef =
-    FirebaseDatabase.instance.ref().child('users/$userid');
+        FirebaseDatabase.instance.ref().child('users/$userid');
 
     userRef.once().then((DatabaseEvent databaseEvent) {
       if (databaseEvent.snapshot.value != null) {
@@ -57,7 +57,8 @@ class HelperMethods {
     return placeAddress;
   }
 
-  static Future<DirectionDetails?> getDirectionDetails(LatLng startPosition, LatLng endPosition) async {
+  static Future<DirectionDetails?> getDirectionDetails(
+      LatLng startPosition, LatLng endPosition) async {
     String url =
         'https://maps.googleapis.com/maps/api/directions/json?origin=${startPosition.latitude},${startPosition.longitude}&destination=${endPosition.latitude},${endPosition.longitude}&mode=driving&key=$mapKey';
 
@@ -70,17 +71,17 @@ class HelperMethods {
     DirectionDetails directionDetails = DirectionDetails();
 
     directionDetails.distanceText =
-    response['routes'][0]['legs'][0]['distance']['text'];
+        response['routes'][0]['legs'][0]['distance']['text'];
     directionDetails.distanceValue =
-    response['routes'][0]['legs'][0]['distance']['value'];
+        response['routes'][0]['legs'][0]['distance']['value'];
 
     directionDetails.durtionText =
-    response['routes'][0]['legs'][0]['duration']['text'];
+        response['routes'][0]['legs'][0]['duration']['text'];
     directionDetails.durtionValue =
-    response['routes'][0]['legs'][0]['duration']['value'];
+        response['routes'][0]['legs'][0]['duration']['value'];
 
     directionDetails.encodedPoints =
-    response['routes'][0]['overview_polyline']['points'];
+        response['routes'][0]['overview_polyline']['points'];
 
     return directionDetails;
   }
@@ -147,33 +148,39 @@ class HelperMethods {
   }
 
   static void getHistoryInfo(context) {
-    DatabaseReference historyRef = FirebaseDatabase.instance
-        .ref()
-        .child('users/${currentFirebaseUser!.uid}/history');
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      DatabaseReference historyRef = FirebaseDatabase.instance
+          .ref()
+          .child('users/${currentUser.uid}/history');
 
-    historyRef.once().then((DatabaseEvent databaseEvent) {
-      if (databaseEvent.snapshot.value != null) {
-        final data = databaseEvent.snapshot.value as Map;
-        List<String> tripHistoryKeys = [];
-        data.forEach((key, value) {
-          tripHistoryKeys.add(key);
-        });
-        // update trip keys to data provider
-        Provider.of<AppData>(context, listen: false)
-            .updateTripKeys(tripHistoryKeys);
+      historyRef.once().then((DatabaseEvent databaseEvent) {
+        if (databaseEvent.snapshot.value != null) {
+          final data = databaseEvent.snapshot.value as Map;
+          List<String> tripHistoryKeys = [];
+          data.forEach((key, value) {
+            tripHistoryKeys.add(key);
+          });
+          // update trip keys to data provider
+          Provider.of<AppData>(context, listen: false)
+              .updateTripKeys(tripHistoryKeys);
 
-        getHistoryData(context);
-      }
-    });
+          getHistoryData(context);
+        }
+      });
+    } else {
+      print('Current user is null');
+    }
   }
 
   static void getHistoryData(context) {
-    List<String> keys =
+    final List<String> keys =
         Provider.of<AppData>(context, listen: false).tripHistoryKeys;
+    final DatabaseReference historyRef = FirebaseDatabase.instance.ref();
+
     for (String key in keys) {
-      DatabaseReference historyRef =
-          FirebaseDatabase.instance.ref().child('tourRequest/$key');
-      historyRef.once().then((DatabaseEvent databaseEvent) {
+      DatabaseReference tripRef = historyRef.child('tourRequest/$key');
+      tripRef.once().then((DatabaseEvent databaseEvent) {
         if (databaseEvent.snapshot.value != null) {
           var history = History.fromSnapshot(databaseEvent);
           Provider.of<AppData>(context, listen: false)

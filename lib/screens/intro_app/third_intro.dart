@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tour_guide_metaverse/screens/login_screen/login_screen.dart';
+import 'package:tour_guide_metaverse/screens/register_screen/register_screen2.dart';
+import 'package:tour_guide_metaverse/shared/styles/styles.dart';
 
 class ThirdIntro extends StatelessWidget {
   const ThirdIntro({Key? key}) : super(key: key);
@@ -60,16 +61,16 @@ class ThirdIntro extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamedAndRemoveUntil(
-                          context, LoginScreen.routeName, (route) => false);
+                          context, RegisterScreen2.routeName, (route) => false);
                     },
                     child: Icon(
                       Icons.arrow_forward,
                       size: 35,
+                      color: base,
                       weight: 100,
                     ),
                     style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.orange[900]),
+                      backgroundColor: MaterialStateProperty.all(Colors.yellow),
                     ),
                   ),
                 ),

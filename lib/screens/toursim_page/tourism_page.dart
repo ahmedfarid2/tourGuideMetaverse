@@ -20,10 +20,11 @@ class _TourismPageState extends State<TourismPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    HelperMethods.getHistoryInfo(context);
-    HelperMethods.getCurrentUserInfo();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      HelperMethods.getHistoryInfo(context);
+      HelperMethods.getCurrentUserInfo();
+    });
   }
 
   @override

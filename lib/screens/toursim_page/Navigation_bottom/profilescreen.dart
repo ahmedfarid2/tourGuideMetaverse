@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tour_guide_metaverse/screens/login_screen/login_screen.dart';
+import 'package:tour_guide_metaverse/screens/login_screen/login_screen2.dart';
 import 'package:tour_guide_metaverse/shared/constants/constants.dart';
 import 'package:tour_guide_metaverse/shared/data_provider/appdata.dart';
 
@@ -322,7 +322,7 @@ class ProfileScreen extends StatelessWidget {
                     // TODO: Implement logout functionality.
                     FirebaseAuth.instance.signOut();
                     Navigator.pushNamedAndRemoveUntil(
-                        context, LoginScreen.routeName, (route) => false);
+                        context, LoginScreen2.routeName, (route) => false);
                   },
                 ),
               ),
