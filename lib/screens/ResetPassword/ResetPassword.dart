@@ -34,7 +34,7 @@ class _ResetPasswordState extends State<ResetPassword> {
           ),
           child: Center(
             child: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pushNamed(
                   context,

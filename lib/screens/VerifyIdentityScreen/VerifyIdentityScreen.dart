@@ -5,8 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'package:sms_autofill/sms_autofill.dart';
+import 'package:tour_guide_metaverse/screens/AccountSetupScreen/AccountSetupScreen.dart';
 import 'package:tour_guide_metaverse/screens/terms_of_service/terms_of_service.dart';
-import 'package:tour_guide_metaverse/screens/toursim_page/tourism_page.dart';
 import 'package:tour_guide_metaverse/shared/data_models/destination_model.dart';
 import 'package:tour_guide_metaverse/shared/reusable_components/CustomizedButton.dart';
 import 'package:tour_guide_metaverse/shared/styles/styles.dart';
@@ -43,12 +43,12 @@ class _VerifyIdentityScreenState extends State<VerifyIdentityScreen> {
     pageController = PageController();
 
     // Start the timer
-    timer = Timer.periodic(Duration(seconds: 5), (Timer t) {
+    timer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
       // Increment the page index
       final nextPage = (pageView + 1) % widget.destination.image!.length;
       pageController.animateToPage(
         nextPage,
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
         curve: Curves.ease,
       );
     });
@@ -97,7 +97,7 @@ class _VerifyIdentityScreenState extends State<VerifyIdentityScreen> {
                           widget.destination.image!.length,
                           (index) => ShaderMask(
                             shaderCallback: (Rect bounds) {
-                              return LinearGradient(
+                              return const LinearGradient(
                                 colors: [Colors.transparent, base],
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
@@ -289,11 +289,9 @@ class _VerifyIdentityScreenState extends State<VerifyIdentityScreen> {
                           onPressed: () async {
                             Navigator.pushNamed(
                               context,
-                              TourismPage.routeName,
-                              arguments: TourismPage(),
+                              AccountSetupScreen.routeName,
+                              arguments: AccountSetupScreen(),
                             );
-                            // Navigator.push(context,
-                            //     MaterialPageRoute(builder: (_) => const LoginScreen()));
                           },
                         ),
                         SizedBox(
@@ -320,7 +318,7 @@ class _VerifyIdentityScreenState extends State<VerifyIdentityScreen> {
                                       Navigator.pushNamed(
                                         context,
                                         TermsOfServiceScreen.routeName,
-                                        arguments: TermsOfServiceScreen(),
+                                        arguments: const TermsOfServiceScreen(),
                                       );
                                     },
                                     child: Text(

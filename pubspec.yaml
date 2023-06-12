@@ -50,7 +50,8 @@ dependencies:
   sizer: ^2.0.15
   google_fonts: ^4.0.4
   sms_autofill: ^2.3.0
-
+  image_picker: ^0.8.7+5
+  im_animations: ^0.1.2
   #  firebase_messaging: ^14.4.0
 
   #google Map
@@ -87,7 +88,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/Elkarnak/
-    - assets/images/TourGuide/
+    - assets/images/tourguide/
 
   fonts:
     - family: Brand-Bold

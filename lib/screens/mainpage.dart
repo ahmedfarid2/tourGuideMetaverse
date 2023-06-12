@@ -131,7 +131,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     if (nearbyIcon == null) {
       ImageConfiguration imageConfiguration = createLocalImageConfiguration(
         context,
-        size: Size(
+        size: const Size(
           2,
           2,
         ),
@@ -199,12 +199,12 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                           children: [
                             Text(
                               currentUserInfo!.fullName!,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 20.0,
                                   fontFamily: "Brand-Bold",
                                   overflow: TextOverflow.ellipsis),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 6.0,
                             ),
                             Text(
@@ -227,8 +227,10 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => FreeTour()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const FreeTour()));
                 },
                 child: ListTile(
                   leading: const Icon(Icons.card_giftcard),
@@ -240,8 +242,10 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Payments()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Payments()));
                 },
                 child: ListTile(
                   leading: const Icon(Icons.credit_card),
@@ -253,8 +257,10 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HistoryPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HistoryPage()));
                 },
                 child: ListTile(
                   leading: const Icon(Icons.history),
@@ -267,7 +273,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               InkWell(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Support()));
+                      MaterialPageRoute(builder: (context) => const Support()));
                 },
                 child: ListTile(
                   leading: const Icon(Icons.contact_support_outlined),
@@ -280,7 +286,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               InkWell(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => About()));
+                      MaterialPageRoute(builder: (context) => const About()));
                 },
                 child: ListTile(
                   leading: const Icon(Icons.info_outline),
@@ -343,7 +349,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                     ),
                   ],
                 ),
-                child: CircleAvatar(
+                child: const CircleAvatar(
                   backgroundColor: Colors.white,
                   radius: 20.0,
                   child: Icon(
@@ -471,10 +477,10 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                                   Icons.search,
                                   color: Colors.orange[900]!,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
-                                Text("Get Tour Guide"),
+                                const Text("Get Tour Guide"),
                               ],
                             ),
                           ),
@@ -528,19 +534,19 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                       const SizedBox(
                         height: 16.0,
                       ),
-                      Row(
+                      const Row(
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.work_outline,
                             color: BrandColors.colorDimText,
                           ),
-                          const SizedBox(
+                          SizedBox(
                             width: 12.0,
                           ),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
+                              children: [
                                 Text(
                                   "Add Work",
                                   overflow: TextOverflow.ellipsis,
@@ -648,10 +654,10 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                       const SizedBox(
                         height: 22,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
                         child: Row(
-                          children: const [
+                          children: [
                             Icon(
                               Icons.money_rounded,
                               size: 25,
@@ -828,7 +834,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Row(
@@ -837,35 +843,36 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                           Text(
                             tripStatusDisplay,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18,
                               fontFamily: 'Brand-Bold',
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      BrandDivider(),
-                      SizedBox(
+                      const BrandDivider(),
+                      const SizedBox(
                         height: 20,
                       ),
                       Text(
                         tourInfoDetails,
-                        style: TextStyle(color: BrandColors.colorTextLight),
+                        style:
+                            const TextStyle(color: BrandColors.colorTextLight),
                       ),
                       Text(
                         tourFullName,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      BrandDivider(),
-                      SizedBox(
+                      const BrandDivider(),
+                      const SizedBox(
                         height: 20,
                       ),
                       Row(
@@ -891,19 +898,19 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                                     height: 50,
                                     width: 50,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(
+                                      borderRadius: const BorderRadius.all(
                                           Radius.circular((25))),
                                       border: Border.all(
                                         width: 1.0,
                                         color: BrandColors.colorTextLight,
                                       ),
                                     ),
-                                    child: Icon(Icons.call),
+                                    child: const Icon(Icons.call),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
-                                  Text('Call'),
+                                  const Text('Call'),
                                 ],
                               ),
                             );
@@ -913,7 +920,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                               showModalBottomSheet(
                                 context: context,
                                 builder: (BuildContext context) => Container(
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     color: Colors.white,
                                     boxShadow: [
                                       BoxShadow(
@@ -935,10 +942,10 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 10,
                                         ),
-                                        Text(
+                                        const Text(
                                           'Name:',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
@@ -948,16 +955,16 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                                         Text(
                                           tourFullName,
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontSize: 15,
                                             fontFamily: 'Brand-Bold',
                                             color: BrandColors.colorText,
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 20,
                                         ),
-                                        Text(
+                                        const Text(
                                           'Phone',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
@@ -967,16 +974,16 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                                         Text(
                                           tourPhoneNumber,
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontSize: 15,
                                             fontFamily: 'Brand-Bold',
                                             color: BrandColors.colorText,
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 20,
                                         ),
-                                        Text(
+                                        const Text(
                                           'Tour Info',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
@@ -986,13 +993,13 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                                         Text(
                                           tourInfoDetails,
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontSize: 15,
                                             fontFamily: 'Brand-Bold',
                                             color: BrandColors.colorText,
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 20,
                                         ),
                                         Row(
@@ -1024,19 +1031,19 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                                   height: 50,
                                   width: 50,
                                   decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular((25))),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular((25))),
                                     border: Border.all(
                                       width: 1.0,
                                       color: BrandColors.colorTextLight,
                                     ),
                                   ),
-                                  child: Icon(Icons.list),
+                                  child: const Icon(Icons.list),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
-                                Text('Details'),
+                                const Text('Details'),
                               ],
                             ),
                           ),
@@ -1044,6 +1051,24 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                             onTap: () {
                               cancelRequest();
                               resetApp();
+                              // get and notify Tour guide using token
+                              DatabaseReference tokenRef = FirebaseDatabase
+                                  .instance
+                                  .ref()
+                                  .child('tourGuides/${tourRef!.key!}/token');
+                              tokenRef
+                                  .once()
+                                  .then((DatabaseEvent databaseEvent) {
+                                if (databaseEvent.snapshot.value != null) {
+                                  String token =
+                                      databaseEvent.snapshot.value.toString();
+                                  //send notification to selected tour
+                                  HelperMethods.sendNotification(
+                                      token, context, tourRef!.key!);
+                                } else {
+                                  return;
+                                }
+                              });
                             },
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -1052,19 +1077,19 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                                   height: 50,
                                   width: 50,
                                   decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular((25))),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular((25))),
                                     border: Border.all(
                                       width: 1.0,
                                       color: BrandColors.colorTextLight,
                                     ),
                                   ),
-                                  child: Icon(Icons.clear_outlined),
+                                  child: const Icon(Icons.clear_outlined),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
-                                Text('Cancel'),
+                                const Text('Cancel'),
                               ],
                             ),
                           ),

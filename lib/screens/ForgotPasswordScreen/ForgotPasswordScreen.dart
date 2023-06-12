@@ -22,7 +22,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           ),
           child: Center(
             child: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pushNamed(
                   context,

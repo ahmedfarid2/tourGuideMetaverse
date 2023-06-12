@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sizer/sizer.dart';
 import 'package:tour_guide_metaverse/screens/register_screen/register_screen2.dart';
 import 'package:tour_guide_metaverse/shared/styles/styles.dart';
 
@@ -24,7 +26,7 @@ class ThirdIntro extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 30, bottom: 20, right: 20),
                 child: Container(
                   width: 450,
-                  child: Column(
+                  child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -50,7 +52,7 @@ class ThirdIntro extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Padding(
@@ -63,14 +65,16 @@ class ThirdIntro extends StatelessWidget {
                       Navigator.pushNamedAndRemoveUntil(
                           context, RegisterScreen2.routeName, (route) => false);
                     },
-                    child: Icon(
-                      Icons.arrow_forward,
-                      size: 35,
-                      color: base,
-                      weight: 100,
-                    ),
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Colors.yellow),
+                    ),
+                    child: Text(
+                      'Sign Up',
+                      style: GoogleFonts.raleway(
+                        fontSize: 12.sp,
+                        color: base,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),

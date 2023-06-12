@@ -7,7 +7,7 @@ class FreeTour extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Free Tour',
           style: TextStyle(
             fontSize: 25,
@@ -31,13 +31,13 @@ class FreeTour extends StatelessWidget {
     return Center(
       child: Container(
         height: MediaQuery.of(context).size.height * 0.35,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/intro3.jpeg'),
             fit: BoxFit.cover,
           ),
         ),
-        child: Column(
+        child: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
@@ -65,8 +65,8 @@ class FreeTour extends StatelessWidget {
 
   Widget _buildInviteBox() {
     return Container(
-      margin: EdgeInsets.all(16.0),
-      padding: EdgeInsets.all(16.0),
+      margin: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10.0),
@@ -74,7 +74,7 @@ class FreeTour extends StatelessWidget {
           BoxShadow(
             color: Colors.grey[400]!,
             blurRadius: 4.0,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -89,7 +89,7 @@ class FreeTour extends StatelessWidget {
               color: Colors.orange[900],
             ),
           ),
-          SizedBox(height: 10.0),
+          const SizedBox(height: 10.0),
           Row(
             children: [
               Expanded(
@@ -101,14 +101,14 @@ class FreeTour extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(width: 10.0),
+              const SizedBox(width: 10.0),
               Container(
                 height: 50.0,
                 decoration: BoxDecoration(
                   color: Colors.orange[900],
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                child: Padding(
+                child: const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12.0),
                   child: Center(
                     child: Text(
@@ -124,7 +124,7 @@ class FreeTour extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 10.0),
+          const SizedBox(height: 10.0),
           Text(
             'Or, share your invite link',
             style: TextStyle(
@@ -133,14 +133,14 @@ class FreeTour extends StatelessWidget {
               color: Colors.orange[900],
             ),
           ),
-          SizedBox(height: 10.0),
+          const SizedBox(height: 10.0),
           Container(
             decoration: BoxDecoration(
               color: Colors.grey[200],
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Padding(
-              padding: EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(12.0),
               child: Text(
                 'https://www.metapharoh.com/invite/myinvitecode',
                 style: TextStyle(

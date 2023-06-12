@@ -7,7 +7,7 @@ class Support extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Support',
           style: TextStyle(
             fontSize: 25,
@@ -40,7 +40,7 @@ class Support extends StatelessWidget {
           colors: [Colors.orange[800]!, Colors.orange[400]!],
         ),
       ),
-      child: Center(
+      child: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -86,19 +86,19 @@ class Support extends StatelessWidget {
                 color: Colors.orange[900],
               ),
             ),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             _buildFAQItem(
               question: 'How do I create an account?',
               answer:
                   'To create an account, tap on the "Sign Up" button on the home screen and fill out the required information.',
             ),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             _buildFAQItem(
               question: 'How do I reset my password?',
               answer:
                   'To reset your password, tap on the "Forgot Password" button on the login screen and follow the instructions.',
             ),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             _buildFAQItem(
               question: 'What payment methods do you accept?',
               answer:
@@ -123,7 +123,7 @@ class Support extends StatelessWidget {
             color: Colors.grey[900],
           ),
         ),
-        SizedBox(height: 8.0),
+        const SizedBox(height: 8.0),
         Text(
           answer,
           style: TextStyle(
@@ -149,7 +149,7 @@ class Support extends StatelessWidget {
               color: Colors.orange[900],
             ),
           ),
-          SizedBox(height: 8.0),
+          const SizedBox(height: 8.0),
           Text(
             'For any inquiries or support, please contact us at:',
             style: TextStyle(
@@ -157,8 +157,8 @@ class Support extends StatelessWidget {
               color: Colors.grey[700],
             ),
           ),
-          SizedBox(height: 8.0),
-          Text(
+          const SizedBox(height: 8.0),
+          const Text(
             'support@example.com',
             style: TextStyle(
               fontSize: 16.0,

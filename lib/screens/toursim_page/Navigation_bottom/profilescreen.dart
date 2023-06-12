@@ -17,7 +17,7 @@ class ProfileScreen extends StatelessWidget {
           children: [
             Container(
               color: Colors.white,
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
                   Row(
@@ -31,19 +31,19 @@ class ProfileScreen extends StatelessWidget {
                           color: Colors.orange[900],
                         ),
                       ),
-                      SizedBox(width: 16),
+                      const SizedBox(width: 16),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               currentUserInfo!.fullName!,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 24,
                                   overflow: TextOverflow.ellipsis),
                             ),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             Text(
                               currentUserInfo!.email!,
                               style: TextStyle(
@@ -56,9 +56,9 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 8),
+                    padding: const EdgeInsets.symmetric(vertical: 8),
                     decoration: BoxDecoration(
                       border: Border(
                         top: BorderSide(
@@ -79,12 +79,12 @@ class ProfileScreen extends StatelessWidget {
                             Text(
                               (Provider.of<AppData>(context).tripHistory.length)
                                   .toString(),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
                               ),
                             ),
-                            SizedBox(height: 4),
+                            const SizedBox(height: 4),
                             Text(
                               'Tours',
                               style: TextStyle(
@@ -96,14 +96,14 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         Column(
                           children: [
-                            Text(
+                            const Text(
                               '12',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
                               ),
                             ),
-                            SizedBox(height: 4),
+                            const SizedBox(height: 4),
                             Text(
                               'Reviews',
                               style: TextStyle(
@@ -115,14 +115,14 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         Column(
                           children: [
-                            Text(
+                            const Text(
                               '3',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
                               ),
                             ),
-                            SizedBox(height: 4),
+                            const SizedBox(height: 4),
                             Text(
                               'Favorites',
                               style: TextStyle(
@@ -135,11 +135,11 @@ class ProfileScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         'Personal Information',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -147,21 +147,21 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.edit),
+                        icon: const Icon(Icons.edit),
                         onPressed: () {
                           // TODO: Implement edit button functionality.
                         },
                       ),
                     ],
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Row(
                     children: [
                       Icon(
                         Icons.person,
                         color: Colors.grey[600],
                       ),
-                      SizedBox(width: 16),
+                      const SizedBox(width: 16),
                       Text(
                         currentUserInfo!.fullName!,
                         style: TextStyle(
@@ -171,11 +171,11 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Row(
                     children: [
                       Icon(Icons.email, color: Colors.grey[600]),
-                      SizedBox(width: 16),
+                      const SizedBox(width: 16),
                       Text(
                         currentUserInfo!.email!,
                         style: TextStyle(
@@ -185,11 +185,11 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Row(
                     children: [
                       Icon(Icons.phone, color: Colors.grey[600]),
-                      SizedBox(width: 16),
+                      const SizedBox(width: 16),
                       Text(
                         currentUserInfo!.phone!,
                         style: TextStyle(
@@ -199,11 +199,11 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         'Payment Methods',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -211,16 +211,16 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.add),
+                        icon: const Icon(Icons.add),
                         onPressed: () {
                           // TODO: Implement add payment method button functionality.
                         },
                       ),
                     ],
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 8),
+                    padding: const EdgeInsets.symmetric(vertical: 8),
                     decoration: BoxDecoration(
                       border: Border(
                         top: BorderSide(
@@ -236,19 +236,19 @@ class ProfileScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         Icon(Icons.credit_card, color: Colors.grey[600]),
-                        SizedBox(width: 16),
+                        const SizedBox(width: 16),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 'Visa ** ** ** 1234',
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              SizedBox(height: 4),
+                              const SizedBox(height: 4),
                               Text(
                                 'Expires 12/25',
                                 style: TextStyle(
@@ -260,7 +260,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                         ),
                         IconButton(
-                          icon: Icon(Icons.delete),
+                          icon: const Icon(Icons.delete),
                           onPressed: () {
                             // TODO: Implement delete payment method button functionality.
                           },
@@ -271,13 +271,13 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Container(
               color: Colors.white,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.all(16),
                     child: Text(
                       'Upcoming Tours',
@@ -289,10 +289,10 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   Card(
                     child: ListTile(
-                      leading: Icon(Icons.location_on),
-                      title: Text('Tour to Pyramids'),
-                      subtitle: Text('July 1, 2023'),
-                      trailing: Icon(Icons.arrow_forward_ios),
+                      leading: const Icon(Icons.location_on),
+                      title: const Text('Tour to Pyramids'),
+                      subtitle: const Text('July 1, 2023'),
+                      trailing: const Icon(Icons.arrow_forward_ios),
                       onTap: () {
                         // TODO: Implement trip details screen.
                       },
@@ -301,7 +301,7 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Center(
               child: SizedBox(
                 width: 150,
@@ -311,7 +311,7 @@ class ProfileScreen extends StatelessWidget {
                     backgroundColor:
                         MaterialStateProperty.all(Colors.orange[900]),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Log out',
                     style: TextStyle(
                       fontSize: 15,
@@ -327,7 +327,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
           ],
         ),
       ),

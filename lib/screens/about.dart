@@ -7,7 +7,7 @@ class About extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'About',
           style: TextStyle(
             fontSize: 25,
@@ -54,8 +54,8 @@ class About extends StatelessWidget {
               color: Colors.blue[900],
             ),
           ),
-          SizedBox(height: 10.0),
-          Text(
+          const SizedBox(height: 10.0),
+          const Text(
             'John Doe',
             style: TextStyle(
               fontSize: 22.0,
@@ -63,8 +63,8 @@ class About extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          SizedBox(height: 5.0),
-          Text(
+          const SizedBox(height: 5.0),
+          const Text(
             'Flutter Developer',
             style: TextStyle(
               fontSize: 18.0,
@@ -78,7 +78,7 @@ class About extends StatelessWidget {
 
   Widget _buildInfo() {
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -90,7 +90,7 @@ class About extends StatelessWidget {
               color: Colors.orange[900],
             ),
           ),
-          SizedBox(height: 10.0),
+          const SizedBox(height: 10.0),
           Text(
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu sapien ut leo pretium scelerisque. Etiam tristique leo eu sagittis vestibulum. Nam non dapibus elit. Aenean consectetur enim ac lorem accumsan, nec vestibulum ante dapibus. Nam efficitur semper nisl, sit amet bibendum nibh mollis a. Aliquam porta metus in ipsum venenatis, eu sollicitudin sapien commodo. Nam ac mauris diam. Maecenas pharetra risus eget eros mollis, quis aliquam mi accumsan. Vestibulum eleifend nisi eu dolor luctus pharetra. Nullam vel lacinia justo, id bibendum magna. Aenean luctus turpis ac turpis tincidunt vulputate. ',
             style: TextStyle(
@@ -98,7 +98,7 @@ class About extends StatelessWidget {
               color: Colors.grey[700],
             ),
           ),
-          SizedBox(height: 20.0),
+          const SizedBox(height: 20.0),
           Text(
             'Contact',
             style: TextStyle(
@@ -107,7 +107,7 @@ class About extends StatelessWidget {
               color: Colors.orange[900],
             ),
           ),
-          SizedBox(height: 10.0),
+          const SizedBox(height: 10.0),
           Text(
             'Email: john.doe@gmail.com',
             style: TextStyle(
@@ -115,7 +115,7 @@ class About extends StatelessWidget {
               color: Colors.grey[700],
             ),
           ),
-          SizedBox(height: 5.0),
+          const SizedBox(height: 5.0),
           Text(
             'Phone: 123-456-7890',
             style: TextStyle(

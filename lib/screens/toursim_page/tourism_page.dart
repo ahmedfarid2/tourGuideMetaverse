@@ -14,8 +14,8 @@ class TourismPage extends StatefulWidget {
 class _TourismPageState extends State<TourismPage> {
   int index = 0;
   final _pagebottom = [
-    HomeScreen(),
-    ProfileScreen(),
+    const HomeScreen(),
+    const ProfileScreen(),
   ];
 
   @override
@@ -40,7 +40,7 @@ class _TourismPageState extends State<TourismPage> {
               height: 50,
               width: 50,
             ),
-            SizedBox(
+            const SizedBox(
               width: 20.0,
             ),
             Text(
@@ -67,9 +67,9 @@ class _TourismPageState extends State<TourismPage> {
           setState(() {});
         },
         showUnselectedLabels: false,
-        selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         selectedItemColor: Colors.orange[900],
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home_outlined,

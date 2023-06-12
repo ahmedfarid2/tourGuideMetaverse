@@ -29,7 +29,7 @@ class OFFLINE extends StatelessWidget {
                         const EdgeInsets.only(left: 20, bottom: 20, right: 20),
                     child: Container(
                       width: 250,
-                      child: Text(
+                      child: const Text(
                         'Are you inside EGYPT!? have offline tour with a tour guide in any place all over egypt fast time high quality, safety.',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -49,7 +49,7 @@ class OFFLINE extends StatelessWidget {
                           MainPage.routeName,
                         );
                       },
-                      child: Icon(Icons.arrow_forward),
+                      child: const Icon(Icons.arrow_forward),
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.orange[900]),
@@ -61,7 +61,7 @@ class OFFLINE extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 15,
         ),
         Container(
@@ -87,7 +87,7 @@ class OFFLINE extends StatelessWidget {
                         const EdgeInsets.only(left: 20, bottom: 20, right: 20),
                     child: Container(
                       width: 250,
-                      child: Text(
+                      child: const Text(
                         'Are you inside EGYPT!? have offline tour with a tour guide in any place all over egypt fast time high quality, safety.',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -102,7 +102,7 @@ class OFFLINE extends StatelessWidget {
                         const EdgeInsets.only(right: 20, bottom: 30, left: 20),
                     child: ElevatedButton(
                       onPressed: () {},
-                      child: Icon(Icons.arrow_forward),
+                      child: const Icon(Icons.arrow_forward),
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.orange[900]),
@@ -114,7 +114,7 @@ class OFFLINE extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 15,
         ),
       ],

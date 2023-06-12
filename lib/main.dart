@@ -5,8 +5,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import 'package:tour_guide_metaverse/screens/AccountSetupScreen/AccountSetupScreen.dart';
 import 'package:tour_guide_metaverse/screens/ForgotPasswordScreen/ForgotPasswordScreen.dart';
 import 'package:tour_guide_metaverse/screens/OculusConnectionScreen.dart';
+import 'package:tour_guide_metaverse/screens/RegisterComplete/RegisterComplete.dart';
 import 'package:tour_guide_metaverse/screens/ResetPassword/ResetPassword.dart';
 import 'package:tour_guide_metaverse/screens/VerifyForgotPassword/VerifyForgotPassword.dart';
 import 'package:tour_guide_metaverse/screens/VerifyIdentityScreen/VerifyIdentityScreen.dart';
@@ -98,6 +100,10 @@ class MyApp extends StatelessWidget {
               VerifyForgotPassword.routeName: (context) =>
                   VerifyForgotPassword(),
               ResetPassword.routeName: (context) => ResetPassword(),
+              AccountSetupScreen.routeName: (context) => AccountSetupScreen(),
+              RegisterComplete.routeName: (context) => RegisterComplete(
+                    destination: popular[0],
+                  ),
             },
           );
         },

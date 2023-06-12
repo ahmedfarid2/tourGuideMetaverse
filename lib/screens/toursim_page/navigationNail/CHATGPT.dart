@@ -28,7 +28,7 @@ class CHATGPT extends StatelessWidget {
                         const EdgeInsets.only(left: 20, bottom: 20, right: 20),
                     child: Container(
                       width: 250,
-                      child: Text(
+                      child: const Text(
                         'Play a game and try the metaverse experience without headset.',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -43,7 +43,7 @@ class CHATGPT extends StatelessWidget {
                         const EdgeInsets.only(right: 20, bottom: 30, left: 20),
                     child: ElevatedButton(
                       onPressed: () {},
-                      child: Icon(Icons.arrow_forward),
+                      child: const Icon(Icons.arrow_forward),
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.orange[900]),
@@ -55,7 +55,7 @@ class CHATGPT extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 15,
         ),
         Container(
@@ -81,7 +81,7 @@ class CHATGPT extends StatelessWidget {
                         const EdgeInsets.only(left: 20, bottom: 20, right: 20),
                     child: Container(
                       width: 250,
-                      child: Text(
+                      child: const Text(
                         'Play a game and try the metaverse experience without headset.',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -96,7 +96,7 @@ class CHATGPT extends StatelessWidget {
                         const EdgeInsets.only(right: 20, bottom: 30, left: 20),
                     child: ElevatedButton(
                       onPressed: () {},
-                      child: Icon(Icons.arrow_forward),
+                      child: const Icon(Icons.arrow_forward),
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.orange[900]),
@@ -108,7 +108,7 @@ class CHATGPT extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 15,
         ),
       ],

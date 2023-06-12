@@ -22,12 +22,24 @@ class _TourGuideListState extends State<TourGuideList> {
   late PageController _pageController;
   int _currentPage = 0;
   List<Review> filteredReviews = [];
+  double selectedRating = 0.0;
 
   @override
   void initState() {
     super.initState();
     _pageController =
         PageController(initialPage: _currentPage, viewportFraction: 0.8);
+    filterReviews();
+  }
+
+  void filterReviews() {
+    filteredReviews = reviews.where((review) {
+      if (selectedRating == 0.0) {
+        return true;
+      } else {
+        return review.rating == selectedRating;
+      }
+    }).toList();
   }
 
   @override
@@ -49,7 +61,7 @@ class _TourGuideListState extends State<TourGuideList> {
           ),
           child: Center(
             child: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pushNamed(
                   context,
@@ -147,10 +159,157 @@ class _TourGuideListState extends State<TourGuideList> {
                       return guideView(index);
                     },
                   ),
-                  Center(
-                    child: Text(
-                      'data',
-                      style: TextStyle(color: white),
+                  SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        left: 2.w,
+                        right: 2.w,
+                        top: 20,
+                        bottom: 20,
+                      ),
+                      child: Column(
+                        children: [
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                FilterButton(
+                                  rating: 0.0,
+                                  isSelected: selectedRating == 0.0,
+                                  onPressed: () {
+                                    setState(() {
+                                      selectedRating = 0.0;
+                                      filterReviews();
+                                    });
+                                  },
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                FilterButton(
+                                  rating: 5.0,
+                                  isSelected: selectedRating == 5.0,
+                                  onPressed: () {
+                                    setState(() {
+                                      selectedRating = 5.0;
+                                      filterReviews();
+                                    });
+                                  },
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                FilterButton(
+                                  rating: 4.0,
+                                  isSelected: selectedRating == 4.0,
+                                  onPressed: () {
+                                    setState(() {
+                                      selectedRating = 4.0;
+                                      filterReviews();
+                                    });
+                                  },
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                FilterButton(
+                                  rating: 3.0,
+                                  isSelected: selectedRating == 3.0,
+                                  onPressed: () {
+                                    setState(() {
+                                      selectedRating = 3.0;
+                                      filterReviews();
+                                    });
+                                  },
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                FilterButton(
+                                  rating: 2.0,
+                                  isSelected: selectedRating == 2.0,
+                                  onPressed: () {
+                                    setState(() {
+                                      selectedRating = 2.0;
+                                      filterReviews();
+                                    });
+                                  },
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                FilterButton(
+                                  rating: 1.0,
+                                  isSelected: selectedRating == 1.0,
+                                  onPressed: () {
+                                    setState(() {
+                                      selectedRating = 1.0;
+                                      filterReviews();
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: filteredReviews.length,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                leading: CircleAvatar(
+                                  backgroundImage:
+                                      filteredReviews[index].avatarImage,
+                                ),
+                                title: Text(
+                                  filteredReviews[index].name,
+                                  style: GoogleFonts.raleway(
+                                    fontWeight: FontWeight.w700,
+                                    color: white,
+                                  ),
+                                ),
+                                subtitle: Text(
+                                  filteredReviews[index].comment,
+                                  style: GoogleFonts.raleway(
+                                    color: white.withOpacity(0.6),
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                trailing: Container(
+                                  width: 80.0,
+                                  height: 40.0,
+                                  decoration: BoxDecoration(
+                                    color: Colors.yellow.withOpacity(0.4),
+                                    borderRadius: BorderRadius.circular(13),
+                                  ),
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        const Icon(
+                                          Icons.star_rounded,
+                                          color: yellow,
+                                          size: 20.0,
+                                        ),
+                                        Text(
+                                          filteredReviews[index]
+                                              .rating
+                                              .toString(),
+                                          style: GoogleFonts.raleway(
+                                            color: white,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -298,6 +457,62 @@ class _TourGuideListState extends State<TourGuideList> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class FilterButton extends StatelessWidget {
+  final double rating;
+  final bool isSelected;
+  final VoidCallback onPressed;
+
+  const FilterButton({
+    required this.rating,
+    required this.isSelected,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 80.0,
+      height: 40.0,
+      decoration: BoxDecoration(
+        border: isSelected
+            ? null
+            : Border.all(
+                width: 2,
+                color: yellow.withOpacity(0.4),
+              ),
+        borderRadius: BorderRadius.circular(13),
+      ),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: isSelected ? yellow.withOpacity(0.4) : base,
+          onPrimary: isSelected ? white : base,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+        ),
+        onPressed: onPressed,
+        child: Row(
+          children: [
+            const Icon(
+              Icons.star_rounded,
+              color: yellow,
+              size: 20,
+            ),
+            const SizedBox(width: 5),
+            Text(
+              rating == 0 ? 'All' : rating.toString(),
+              style: GoogleFonts.raleway(
+                fontSize: 14,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

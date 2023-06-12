@@ -24,7 +24,7 @@ class SecondIntro extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 30, bottom: 20, right: 20),
                 child: Container(
                   width: 450,
-                  child: Column(
+                  child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -50,7 +50,7 @@ class SecondIntro extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Padding(
@@ -63,14 +63,14 @@ class SecondIntro extends StatelessWidget {
                       Navigator.pushNamedAndRemoveUntil(
                           context, ThirdIntro.routeName, (route) => false);
                     },
-                    child: Icon(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.yellow),
+                    ),
+                    child: const Icon(
                       Icons.arrow_forward,
                       size: 35,
                       color: base,
                       weight: 100,
-                    ),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.yellow),
                     ),
                   ),
                 ),

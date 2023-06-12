@@ -22,7 +22,7 @@ class TermsOfServiceScreen extends StatelessWidget {
           ),
           child: Center(
             child: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pushNamed(
                   context,
@@ -121,7 +121,7 @@ class TermsOfServiceScreen extends StatelessWidget {
                       fontWeight: FontWeight.normal,
                       color: white.withOpacity(0.6),
                       fontSize: 9.sp)),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               Text(
                 '2. PRIVACY\n',
                 style: GoogleFonts.raleway(

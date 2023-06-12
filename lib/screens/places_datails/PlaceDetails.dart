@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tour_guide_metaverse/screens/tourguide_list/tourguide_list.dart';
+import 'package:tour_guide_metaverse/screens/toursim_page/tourism_page.dart';
 import 'package:tour_guide_metaverse/shared/data_models/Reviews.dart';
 import 'package:tour_guide_metaverse/shared/data_models/destination_model.dart';
 import 'package:tour_guide_metaverse/shared/styles/styles.dart';
@@ -48,502 +49,513 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
         destinations.where((element) => element.category == 'popular').toList();
     return Scaffold(
       backgroundColor: base,
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        color: base,
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              backgroundColor: base,
-              leading: Padding(
-                padding: EdgeInsets.only(
-                  left: 1.w,
-                  top: 3.h,
-                ),
-                child: IconButton(
-                  onPressed: () {
-                    // Navigator.pushNamed(
-                    //   context,
-                    //   '/LoginScreen',
-                    //   arguments: LoginScreen(destination: popular[0],),
-                    // );
-                  },
-                  icon: Icon(
-                    Icons.arrow_back_sharp,
-                  ),
-                ),
-              ),
-              actions: [
-                Padding(
+      body: SafeArea(
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          color: base,
+          child: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                backgroundColor: base,
+                leading: Padding(
                   padding: EdgeInsets.only(
-                    right: 4.w,
+                    left: 1.w,
                     top: 3.h,
                   ),
                   child: IconButton(
                     onPressed: () {
-                      setState(() {
-                        isPressed = !isPressed;
-                      });
+                      Navigator.pushNamed(
+                        context,
+                        TourismPage.routeName,
+                        arguments: const TourismPage(),
+                      );
                     },
-                    icon: Icon(
-                      isPressed ? Icons.bookmark : Icons.bookmark_border,
-                      color: isPressed ? Colors.yellow : null,
+                    icon: const Icon(
+                      Icons.arrow_back_sharp,
                     ),
                   ),
                 ),
-              ],
-              expandedHeight: MediaQuery.of(context).size.height * 0.6,
-              flexibleSpace: FlexibleSpaceBar(
-                background: Container(
-                  color: base,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(15),
-                      bottomLeft: Radius.circular(15),
+                actions: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                      right: 4.w,
+                      top: 3.h,
                     ),
-                    child: Stack(
-                      children: [
-                        PageView(
-                          controller: pageController,
-                          onPageChanged: (value) {
-                            setState(() {
-                              pageView = value;
-                            });
-                          },
-                          children: List.generate(
-                            widget.destination.image!.length,
-                            (index) => ShaderMask(
-                              shaderCallback: (Rect bounds) {
-                                return LinearGradient(
-                                  colors: [Colors.transparent, base],
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                ).createShader(bounds);
-                              },
-                              blendMode: BlendMode.darken,
-                              child: Image.asset(
-                                'assets/${widget.destination.image![index]}',
-                                fit: BoxFit.cover,
+                    child: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          isPressed = !isPressed;
+                        });
+                      },
+                      icon: Icon(
+                        isPressed ? Icons.bookmark : Icons.bookmark_border,
+                        color: isPressed ? Colors.yellow : null,
+                      ),
+                    ),
+                  ),
+                ],
+                expandedHeight: MediaQuery.of(context).size.height * 0.6,
+                flexibleSpace: FlexibleSpaceBar(
+                  background: Container(
+                    color: base,
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        bottomRight: Radius.circular(15),
+                        bottomLeft: Radius.circular(15),
+                      ),
+                      child: Stack(
+                        children: [
+                          PageView(
+                            controller: pageController,
+                            onPageChanged: (value) {
+                              setState(() {
+                                pageView = value;
+                              });
+                            },
+                            children: List.generate(
+                              widget.destination.image!.length,
+                              (index) => ShaderMask(
+                                shaderCallback: (Rect bounds) {
+                                  return const LinearGradient(
+                                    colors: [Colors.transparent, base],
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                  ).createShader(bounds);
+                                },
+                                blendMode: BlendMode.darken,
+                                child: Image.asset(
+                                  'assets/${widget.destination.image![index]}',
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            const Spacer(),
-                            Expanded(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    flex: 4,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                        left: 6.w,
-                                        bottom: 1.h,
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          Container(
-                                            width: 15.w,
-                                            height: 5.h,
-                                            decoration: BoxDecoration(
-                                              color: Colors.black54,
-                                              borderRadius:
-                                                  BorderRadius.circular(13),
-                                            ),
-                                            child: Center(
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Icon(
-                                                    Icons.star_rounded,
-                                                    color: Colors.yellow,
-                                                    size: 13.sp,
-                                                  ),
-                                                  Text(
-                                                    '${widget.destination.rate!}',
-                                                    style: GoogleFonts.raleway(
-                                                      fontSize: 12.sp,
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
-                                                  ),
-                                                ],
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              const Spacer(),
+                              Expanded(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      flex: 4,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                          left: 6.w,
+                                          bottom: 1.h,
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Container(
+                                              width: 15.w,
+                                              height: 5.h,
+                                              decoration: BoxDecoration(
+                                                color: Colors.black54,
+                                                borderRadius:
+                                                    BorderRadius.circular(13),
                                               ),
-                                            ),
-                                          ),
-                                          SizedBox(height: 5),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Container(
-                                                    width: 60.w,
-                                                    child: Text(
-                                                      widget.destination.name!,
+                                              child: Center(
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Icon(
+                                                      Icons.star_rounded,
+                                                      color: Colors.yellow,
+                                                      size: 13.sp,
+                                                    ),
+                                                    Text(
+                                                      '${widget.destination.rate!}',
                                                       style:
                                                           GoogleFonts.raleway(
-                                                        fontSize: 30.sp,
+                                                        fontSize: 12.sp,
                                                         color: Colors.white,
                                                         fontWeight:
-                                                            FontWeight.w800,
+                                                            FontWeight.w500,
                                                       ),
-                                                      maxLines: 2,
                                                     ),
-                                                  ),
-                                                  const SizedBox(height: 5),
-                                                  Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.end,
-                                                    children: [
-                                                      const Icon(
-                                                        Icons.location_on,
-                                                        color: white,
-                                                        size: 20,
-                                                      ),
-                                                      const SizedBox(width: 5),
-                                                      Text(
-                                                        widget.destination
-                                                            .location!,
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(height: 5),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Container(
+                                                      width: 60.w,
+                                                      child: Text(
+                                                        widget
+                                                            .destination.name!,
                                                         style:
                                                             GoogleFonts.raleway(
-                                                          fontSize: 14,
-                                                          color: white
-                                                              .withOpacity(0.6),
+                                                          fontSize: 30.sp,
+                                                          color: Colors.white,
                                                           fontWeight:
-                                                              FontWeight.w400,
+                                                              FontWeight.w800,
                                                         ),
+                                                        maxLines: 2,
                                                       ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                                    ),
+                                                    const SizedBox(height: 5),
+                                                    Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      children: [
+                                                        const Icon(
+                                                          Icons.location_on,
+                                                          color: white,
+                                                          size: 20,
+                                                        ),
+                                                        const SizedBox(
+                                                            width: 5),
+                                                        Text(
+                                                          widget.destination
+                                                              .location!,
+                                                          style: GoogleFonts
+                                                              .raleway(
+                                                            fontSize: 14,
+                                                            color: white
+                                                                .withOpacity(
+                                                                    0.6),
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.vertical,
-                                      itemCount:
-                                          widget.destination.image!.length,
-                                      itemBuilder: (context, index) {
-                                        return GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              tappedIndex = index;
-                                            });
-                                            if (pageController.hasClients) {
-                                              pageController.animateToPage(
-                                                index,
+                                    Expanded(
+                                      flex: 1,
+                                      child: ListView.builder(
+                                        scrollDirection: Axis.vertical,
+                                        itemCount:
+                                            widget.destination.image!.length,
+                                        itemBuilder: (context, index) {
+                                          return GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                tappedIndex = index;
+                                              });
+                                              if (pageController.hasClients) {
+                                                pageController.animateToPage(
+                                                  index,
+                                                  duration: const Duration(
+                                                      milliseconds: 500),
+                                                  curve: Curves.easeInOut,
+                                                );
+                                              }
+                                            },
+                                            child: Center(
+                                              child: AnimatedContainer(
+                                                height: 50,
+                                                width: 50,
+                                                margin: EdgeInsets.only(
+                                                    right: 3.w, bottom: 10),
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                    width: 2,
+                                                    color: tappedIndex == index
+                                                        ? Colors.yellow
+                                                        : Colors.white,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                  image: DecorationImage(
+                                                    image: AssetImage(
+                                                        'assets/${widget.destination.image![index]}'),
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
                                                 duration: const Duration(
-                                                    milliseconds: 500),
-                                                curve: Curves.easeInOut,
-                                              );
-                                            }
-                                          },
-                                          child: Center(
-                                            child: AnimatedContainer(
-                                              height: 50,
-                                              width: 50,
-                                              margin: EdgeInsets.only(
-                                                  right: 3.w, bottom: 10),
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  width: 2,
-                                                  color: tappedIndex == index
-                                                      ? Colors.yellow
-                                                      : Colors.white,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
-                                                image: DecorationImage(
-                                                  image: AssetImage(
-                                                      'assets/${widget.destination.image![index]}'),
-                                                  fit: BoxFit.cover,
-                                                ),
+                                                    milliseconds: 200),
+                                                transform: Matrix4.identity()
+                                                  ..scale(tappedIndex == index
+                                                      ? 1.1
+                                                      : 1.0),
                                               ),
-                                              duration: const Duration(
-                                                  milliseconds: 200),
-                                              transform: Matrix4.identity()
-                                                ..scale(tappedIndex == index
-                                                    ? 1.1
-                                                    : 1.0),
                                             ),
-                                          ),
-                                        );
-                                      },
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SliverFillRemaining(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: 10,
+                  ),
+                  child: DefaultTabController(
+                    length: 3,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          child: TabBar(
+                            labelColor: yellow,
+                            unselectedLabelColor: white,
+                            indicatorColor: yellow,
+                            indicatorSize: TabBarIndicatorSize.label,
+                            indicatorPadding: const EdgeInsets.symmetric(
+                              vertical: 12.0,
+                              horizontal: 15.0,
+                            ),
+                            // Adjust the vertical padding here
+                            tabs: [
+                              Tab(
+                                child: Text(
+                                  'History',
+                                  style: GoogleFonts.raleway(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                              Tab(
+                                child: Text(
+                                  'Location',
+                                  style: GoogleFonts.raleway(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                              Tab(
+                                child: Text(
+                                  'Review',
+                                  style: GoogleFonts.raleway(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: TabBarView(
+                            children: [
+                              SingleChildScrollView(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 40,
+                                    right: 20,
+                                    top: 10,
+                                  ),
+                                  child: Text(
+                                    '${widget.destination.description}',
+                                    style: GoogleFonts.raleway(
+                                      color: white.withOpacity(0.6),
+                                      fontSize: 12,
+                                      height: 1.5,
                                     ),
                                   ),
-                                ],
+                                ),
                               ),
-                            ),
-                          ],
+                              const Center(
+                                child: Text(
+                                  'Location',
+                                ),
+                              ),
+                              SingleChildScrollView(
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                    left: 2.w,
+                                    right: 2.w,
+                                    top: 20,
+                                    bottom: 20,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: Row(
+                                          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            FilterButton(
+                                              rating: 0.0,
+                                              isSelected: selectedRating == 0.0,
+                                              onPressed: () {
+                                                setState(() {
+                                                  selectedRating = 0.0;
+                                                  filterReviews();
+                                                });
+                                              },
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            FilterButton(
+                                              rating: 5.0,
+                                              isSelected: selectedRating == 5.0,
+                                              onPressed: () {
+                                                setState(() {
+                                                  selectedRating = 5.0;
+                                                  filterReviews();
+                                                });
+                                              },
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            FilterButton(
+                                              rating: 4.0,
+                                              isSelected: selectedRating == 4.0,
+                                              onPressed: () {
+                                                setState(() {
+                                                  selectedRating = 4.0;
+                                                  filterReviews();
+                                                });
+                                              },
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            FilterButton(
+                                              rating: 3.0,
+                                              isSelected: selectedRating == 3.0,
+                                              onPressed: () {
+                                                setState(() {
+                                                  selectedRating = 3.0;
+                                                  filterReviews();
+                                                });
+                                              },
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            FilterButton(
+                                              rating: 2.0,
+                                              isSelected: selectedRating == 2.0,
+                                              onPressed: () {
+                                                setState(() {
+                                                  selectedRating = 2.0;
+                                                  filterReviews();
+                                                });
+                                              },
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            FilterButton(
+                                              rating: 1.0,
+                                              isSelected: selectedRating == 1.0,
+                                              onPressed: () {
+                                                setState(() {
+                                                  selectedRating = 1.0;
+                                                  filterReviews();
+                                                });
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      ListView.builder(
+                                        shrinkWrap: true,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        itemCount: filteredReviews.length,
+                                        itemBuilder: (context, index) {
+                                          return ListTile(
+                                            leading: CircleAvatar(
+                                              backgroundImage:
+                                                  filteredReviews[index]
+                                                      .avatarImage,
+                                            ),
+                                            title: Text(
+                                              filteredReviews[index].name,
+                                              style: GoogleFonts.raleway(
+                                                fontWeight: FontWeight.w700,
+                                                color: white,
+                                              ),
+                                            ),
+                                            subtitle: Text(
+                                              filteredReviews[index].comment,
+                                              style: GoogleFonts.raleway(
+                                                color: white.withOpacity(0.6),
+                                                fontWeight: FontWeight.normal,
+                                                fontSize: 12,
+                                              ),
+                                            ),
+                                            trailing: Container(
+                                              width: 80.0,
+                                              height: 40.0,
+                                              decoration: BoxDecoration(
+                                                color: Colors.yellow
+                                                    .withOpacity(0.4),
+                                                borderRadius:
+                                                    BorderRadius.circular(13),
+                                              ),
+                                              child: Center(
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                    const Icon(
+                                                      Icons.star_rounded,
+                                                      color: yellow,
+                                                      size: 20.0,
+                                                    ),
+                                                    Text(
+                                                      filteredReviews[index]
+                                                          .rating
+                                                          .toString(),
+                                                      style:
+                                                          GoogleFonts.raleway(
+                                                        color: white,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ),
               ),
-            ),
-            SliverFillRemaining(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  top: 10,
-                ),
-                child: DefaultTabController(
-                  length: 3,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        child: TabBar(
-                          labelColor: yellow,
-                          unselectedLabelColor: white,
-                          indicatorColor: yellow,
-                          indicatorSize: TabBarIndicatorSize.label,
-                          indicatorPadding: EdgeInsets.symmetric(
-                            vertical: 12.0,
-                            horizontal: 15.0,
-                          ),
-                          // Adjust the vertical padding here
-                          tabs: [
-                            Tab(
-                              child: Text(
-                                'History',
-                                style: GoogleFonts.raleway(
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                            Tab(
-                              child: Text(
-                                'Location',
-                                style: GoogleFonts.raleway(
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                            Tab(
-                              child: Text(
-                                'Review',
-                                style: GoogleFonts.raleway(
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: TabBarView(
-                          children: [
-                            SingleChildScrollView(
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 40,
-                                  right: 20,
-                                  top: 10,
-                                ),
-                                child: Text(
-                                  '${widget.destination.description}',
-                                  style: GoogleFonts.raleway(
-                                    color: white.withOpacity(0.6),
-                                    fontSize: 12,
-                                    height: 1.5,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const Center(
-                              child: Text(
-                                'Location',
-                              ),
-                            ),
-                            SingleChildScrollView(
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                  left: 2.w,
-                                  right: 2.w,
-                                  top: 20,
-                                  bottom: 20,
-                                ),
-                                child: Column(
-                                  children: [
-                                    SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Row(
-                                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          FilterButton(
-                                            rating: 0.0,
-                                            isSelected: selectedRating == 0.0,
-                                            onPressed: () {
-                                              setState(() {
-                                                selectedRating = 0.0;
-                                                filterReviews();
-                                              });
-                                            },
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          FilterButton(
-                                            rating: 5.0,
-                                            isSelected: selectedRating == 5.0,
-                                            onPressed: () {
-                                              setState(() {
-                                                selectedRating = 5.0;
-                                                filterReviews();
-                                              });
-                                            },
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          FilterButton(
-                                            rating: 4.0,
-                                            isSelected: selectedRating == 4.0,
-                                            onPressed: () {
-                                              setState(() {
-                                                selectedRating = 4.0;
-                                                filterReviews();
-                                              });
-                                            },
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          FilterButton(
-                                            rating: 3.0,
-                                            isSelected: selectedRating == 3.0,
-                                            onPressed: () {
-                                              setState(() {
-                                                selectedRating = 3.0;
-                                                filterReviews();
-                                              });
-                                            },
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          FilterButton(
-                                            rating: 2.0,
-                                            isSelected: selectedRating == 2.0,
-                                            onPressed: () {
-                                              setState(() {
-                                                selectedRating = 2.0;
-                                                filterReviews();
-                                              });
-                                            },
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          FilterButton(
-                                            rating: 1.0,
-                                            isSelected: selectedRating == 1.0,
-                                            onPressed: () {
-                                              setState(() {
-                                                selectedRating = 1.0;
-                                                filterReviews();
-                                              });
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    ListView.builder(
-                                      shrinkWrap: true,
-                                      physics: NeverScrollableScrollPhysics(),
-                                      itemCount: filteredReviews.length,
-                                      itemBuilder: (context, index) {
-                                        return ListTile(
-                                          leading: CircleAvatar(
-                                            backgroundImage:
-                                                filteredReviews[index]
-                                                    .avatarImage,
-                                          ),
-                                          title: Text(
-                                            filteredReviews[index].name,
-                                            style: GoogleFonts.raleway(
-                                              fontWeight: FontWeight.w700,
-                                              color: white,
-                                            ),
-                                          ),
-                                          subtitle: Text(
-                                            filteredReviews[index].comment,
-                                            style: GoogleFonts.raleway(
-                                              color: white.withOpacity(0.6),
-                                              fontWeight: FontWeight.normal,
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                          trailing: Container(
-                                            width: 80.0,
-                                            height: 40.0,
-                                            decoration: BoxDecoration(
-                                              color: Colors.yellow
-                                                  .withOpacity(0.4),
-                                              borderRadius:
-                                                  BorderRadius.circular(13),
-                                            ),
-                                            child: Center(
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Icon(
-                                                    Icons.star_rounded,
-                                                    color: yellow,
-                                                    size: 20.0,
-                                                  ),
-                                                  Text(
-                                                    filteredReviews[index]
-                                                        .rating
-                                                        .toString(),
-                                                    style: GoogleFonts.raleway(
-                                                      color: white,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       extendBody: true,
@@ -611,7 +623,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                               ));
                         },
                         child: Container(
-                          height: 8.h,
+                          height: 6.h,
                           decoration: BoxDecoration(
                             color: white,
                             borderRadius: BorderRadius.circular(15),
@@ -620,14 +632,14 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(
-                                  Icons.calendar_today,
-                                  color: base,
-                                  size: 20,
+                                Image.asset(
+                                  'assets/images/car_android.png',
+                                  height: 35,
+                                  width: 35,
                                 ),
                                 const SizedBox(width: 5),
                                 Text(
-                                  'Book Now',
+                                  'Your Guide',
                                   style: GoogleFonts.raleway(
                                     fontSize: 16,
                                     color: base,
@@ -692,7 +704,7 @@ class FilterButton extends StatelessWidget {
               color: yellow,
               size: 20,
             ),
-            SizedBox(width: 5),
+            const SizedBox(width: 5),
             Text(
               rating == 0 ? 'All' : rating.toString(),
               style: GoogleFonts.raleway(

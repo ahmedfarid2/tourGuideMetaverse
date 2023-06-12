@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tour_guide_metaverse/screens/OculusConnectionScreen.dart';
+import 'package:tour_guide_metaverse/screens/places_datails/PlaceDetails.dart';
 
 class METAVERSE extends StatelessWidget {
   @override
@@ -29,7 +30,7 @@ class METAVERSE extends StatelessWidget {
                         const EdgeInsets.only(left: 20, bottom: 20, right: 20),
                     child: Container(
                       width: 250,
-                      child: Text(
+                      child: const Text(
                         'Have a virtual tour inside the Metaverse with a tour guide.',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -45,9 +46,9 @@ class METAVERSE extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.pushNamed(
-                            context, OculusConnectionScreen.routeName);
+                            context, PlaceDetailsScreen.routeName);
                       },
-                      child: Icon(Icons.arrow_forward),
+                      child: const Icon(Icons.arrow_forward),
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.orange[900]),
@@ -59,7 +60,7 @@ class METAVERSE extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 15,
         ),
         Container(
@@ -85,7 +86,7 @@ class METAVERSE extends StatelessWidget {
                         const EdgeInsets.only(left: 20, bottom: 20, right: 20),
                     child: Container(
                       width: 250,
-                      child: Text(
+                      child: const Text(
                         'Have a virtual tour inside the Metaverse with a tour guide.',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -99,8 +100,11 @@ class METAVERSE extends StatelessWidget {
                     padding:
                         const EdgeInsets.only(right: 20, bottom: 30, left: 20),
                     child: ElevatedButton(
-                      onPressed: () {},
-                      child: Icon(Icons.arrow_forward),
+                      onPressed: () {
+                        Navigator.pushNamed(
+                            context, OculusConnectionScreen.routeName);
+                      },
+                      child: const Icon(Icons.arrow_forward),
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.orange[900]),
@@ -112,7 +116,7 @@ class METAVERSE extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 15,
         ),
       ],

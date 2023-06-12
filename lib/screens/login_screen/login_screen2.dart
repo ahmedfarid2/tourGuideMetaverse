@@ -88,12 +88,12 @@ class _LoginScreen2State extends State<LoginScreen2> {
     pageController = PageController();
 
     // Start the timer
-    timer = Timer.periodic(Duration(seconds: 5), (Timer t) {
+    timer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
       // Increment the page index
       final nextPage = (pageView + 1) % widget.destination.image!.length;
       pageController.animateToPage(
         nextPage,
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
         curve: Curves.ease,
       );
     });
@@ -127,7 +127,7 @@ class _LoginScreen2State extends State<LoginScreen2> {
                   Container(
                     height: 45.h,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         bottomRight: Radius.circular(15),
                         bottomLeft: Radius.circular(15),
                       ),
@@ -142,7 +142,7 @@ class _LoginScreen2State extends State<LoginScreen2> {
                           widget.destination.image!.length,
                           (index) => ShaderMask(
                             shaderCallback: (Rect bounds) {
-                              return LinearGradient(
+                              return const LinearGradient(
                                 colors: [Colors.transparent, base],
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
@@ -231,21 +231,23 @@ class _LoginScreen2State extends State<LoginScreen2> {
                                   keyboardType: TextInputType.emailAddress,
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.all(10.0),
+                                  padding: const EdgeInsets.all(10.0),
                                   child: Form(
                                     child: TextField(
                                       obscureText: true,
                                       controller: passwordControler,
                                       keyboardType: TextInputType.text,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.white,
                                       ),
                                       decoration: InputDecoration(
-                                        enabledBorder: UnderlineInputBorder(
+                                        enabledBorder:
+                                            const UnderlineInputBorder(
                                           borderSide: BorderSide(
                                               color: Colors.grey, width: 1),
                                         ),
-                                        focusedBorder: UnderlineInputBorder(
+                                        focusedBorder:
+                                            const UnderlineInputBorder(
                                           borderSide: BorderSide(
                                               color: Colors.grey, width: 1),
                                         ),
@@ -254,7 +256,7 @@ class _LoginScreen2State extends State<LoginScreen2> {
                                           color: Colors.grey,
                                           fontSize: 10.sp,
                                         ),
-                                        border: UnderlineInputBorder(
+                                        border: const UnderlineInputBorder(
                                           borderSide: BorderSide(
                                               color: Colors.grey, width: 1),
                                         ),

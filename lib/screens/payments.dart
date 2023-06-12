@@ -52,17 +52,17 @@ class Payments extends StatelessWidget {
                 const SizedBox(height: 20),
                 const Divider(thickness: 1),
                 const SizedBox(height: 20),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                    Text(
                       'Total',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                       ),
                     ),
-                    const Text(
+                    Text(
                       '\$12.34',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,

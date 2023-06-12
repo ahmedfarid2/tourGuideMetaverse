@@ -32,13 +32,13 @@ class _HomeScreenState extends State<HomeScreen> {
               fontSize: 17,
               fontFamily: 'Brand-Bold',
             ),
-            unselectedLabelTextStyle: TextStyle(
+            unselectedLabelTextStyle: const TextStyle(
               color: Colors.black,
               fontSize: 15,
               fontFamily: 'Brand-Bold',
             ),
-            trailing: Padding(
-              padding: const EdgeInsets.only(top: 30.0),
+            trailing: const Padding(
+              padding: EdgeInsets.only(top: 30.0),
             ),
             labelType: NavigationRailLabelType.all,
             selectedIndex: _selectedIndex,
@@ -47,9 +47,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 _selectedIndex = index;
               });
             },
-            destinations: [
+            destinations: const [
               NavigationRailDestination(
-                icon: const Icon(null),
+                icon: Icon(null),
                 label: RotatedBox(
                   quarterTurns: 3,
                   child: Text(
@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               NavigationRailDestination(
-                icon: const Icon(null),
+                icon: Icon(null),
                 label: RotatedBox(
                   quarterTurns: 3,
                   child: Text(
@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               NavigationRailDestination(
-                icon: const Icon(null),
+                icon: Icon(null),
                 label: RotatedBox(
                   quarterTurns: 3,
                   child: Text(
@@ -82,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
           flex: 6,
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            physics: PageScrollPhysics(),
+            physics: const PageScrollPhysics(),
             child: _pagesleft[_selectedIndex],
           ),
         ),

@@ -65,7 +65,25 @@ class CustomizedTextfield extends StatelessWidget {
                               color: Colors.yellow,
                               size: 12.sp,
                             )
-                          : null,
+                          : hintText == "New Password"
+                              ? Icon(
+                                  Icons.lock_outline,
+                                  color: Colors.yellow,
+                                  size: 12.sp,
+                                )
+                              : hintText == "Confirm Password"
+                                  ? Icon(
+                                      Icons.lock_outline,
+                                      color: Colors.yellow,
+                                      size: 12.sp,
+                                    )
+                                  : hintText == "username"
+                                      ? Icon(
+                                          Icons.person_outline,
+                                          color: Colors.yellow,
+                                          size: 12.sp,
+                                        )
+                                      : null,
         ),
       ),
     );

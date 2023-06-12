@@ -99,12 +99,12 @@ class _RegisterScreen2State extends State<RegisterScreen2> {
     pageController = PageController();
 
     // Start the timer
-    timer = Timer.periodic(Duration(seconds: 5), (Timer t) {
+    timer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
       // Increment the page index
       final nextPage = (pageView + 1) % widget.destination.image!.length;
       pageController.animateToPage(
         nextPage,
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
         curve: Curves.ease,
       );
     });
@@ -138,7 +138,7 @@ class _RegisterScreen2State extends State<RegisterScreen2> {
                   Container(
                     height: MediaQuery.of(context).size.height * 0.35,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         bottomRight: Radius.circular(15),
                         bottomLeft: Radius.circular(15),
                       ),
@@ -153,7 +153,7 @@ class _RegisterScreen2State extends State<RegisterScreen2> {
                           widget.destination.image!.length,
                           (index) => ShaderMask(
                             shaderCallback: (Rect bounds) {
-                              return LinearGradient(
+                              return const LinearGradient(
                                 colors: [Colors.transparent, base],
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,

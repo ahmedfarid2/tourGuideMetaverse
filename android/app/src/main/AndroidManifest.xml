@@ -7,9 +7,16 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:label="tour_guide_metaverse"
+        android:label="MetaPharoh"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="YOUR_ADMOB_APP_ID" />
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

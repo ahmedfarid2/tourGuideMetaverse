@@ -21,7 +21,7 @@ class HistoryPage extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.keyboard_arrow_left),
+          icon: const Icon(Icons.keyboard_arrow_left),
         ),
       ),
       body: ListView.separated(

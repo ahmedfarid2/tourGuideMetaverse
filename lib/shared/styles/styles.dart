@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-final kDrawerItemtyle = TextStyle(
+const kDrawerItemtyle = TextStyle(
   fontSize: 16,
 );
 
