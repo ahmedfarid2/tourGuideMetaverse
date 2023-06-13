@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:im_animations/im_animations.dart';
 import 'package:sizer/sizer.dart';
-import 'package:tour_guide_metaverse/screens/places_datails/PlaceDetails.dart';
 import 'package:tour_guide_metaverse/screens/toursim_page/tourism_page.dart';
 import 'package:tour_guide_metaverse/shared/data_models/destination_model.dart';
 import 'package:tour_guide_metaverse/shared/reusable_components/CustomizedButton.dart';
@@ -191,7 +190,7 @@ class _RegisterCompleteState extends State<RegisterComplete> {
                   onPressed: () async {
                     Navigator.pushNamed(
                       context,
-                      PlaceDetailsScreen.routeName,
+                      TourismPage.routeName,
                       arguments: TourismPage(),
                     );
                   },
