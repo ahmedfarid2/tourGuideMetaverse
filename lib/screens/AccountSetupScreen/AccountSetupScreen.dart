@@ -74,39 +74,39 @@ class _AccountSetupScreenState extends State<AccountSetupScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  width: 30.w,
-                  height: 20.h,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: Colors.white.withOpacity(0.24),
-                      width: 0.3.w,
+                GestureDetector(
+                  onTap: _pickImage,
+                  child: Container(
+                    width: 30.w,
+                    height: 15.h,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Colors.white.withOpacity(0.24),
+                        width: 0.3.w,
+                      ),
                     ),
-                  ),
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      if (_image != null)
-                        ClipOval(
-                          child: Image.network(
-                            _image!.path,
-                            width: 30.w,
-                            height: 20.h,
-                            fit: BoxFit.cover,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        if (_image != null)
+                          ClipOval(
+                            child: Image.file(
+                              _image!,
+                              width: 30.w,
+                              height: 20.h,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                        else
+                          Icon(
+                            Icons.person,
+                            size: 25.sp,
+                            color: Colors.white24,
                           ),
-                        )
-                      else
-                        Icon(
-                          Icons.person,
-                          size: 25.sp,
-                          color: Colors.white24,
-                        ),
-                      Positioned(
-                        bottom: 2.h,
-                        right: 0.w,
-                        child: GestureDetector(
-                          onTap: _pickImage,
+                        Positioned(
+                          bottom: 2.h,
+                          right: 0.w,
                           child: Container(
                             padding: EdgeInsets.all(5.sp),
                             decoration: BoxDecoration(
@@ -120,8 +120,8 @@ class _AccountSetupScreenState extends State<AccountSetupScreen> {
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -134,17 +134,20 @@ class _AccountSetupScreenState extends State<AccountSetupScreen> {
               keyboardType: TextInputType.text,
             ),
             SizedBox(
-              height: 17.h,
+              height: 18.h,
             ),
             CustomizedButton(
               buttonText: "Create Account",
               buttonColor: yellow,
               onPressed: () async {
-                Navigator.pushNamed(
+                Navigator.push(
                   context,
-                  RegisterComplete.routeName,
-                  arguments: RegisterComplete(
-                    destination: popular[0],
+                  MaterialPageRoute(
+                    builder: (context) => RegisterComplete(
+                      image: _image,
+                      username: _usernameController.text,
+                      destination: popular[0],
+                    ),
                   ),
                 );
               },

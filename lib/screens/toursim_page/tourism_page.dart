@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
+import 'package:tour_guide_metaverse/screens/toursim_page/Navigation_bottom/bookmarkscreen.dart';
+import 'package:tour_guide_metaverse/screens/toursim_page/Navigation_bottom/explorescreen.dart';
 import 'package:tour_guide_metaverse/screens/toursim_page/Navigation_bottom/homescreen.dart';
 import 'package:tour_guide_metaverse/screens/toursim_page/Navigation_bottom/profilescreen.dart';
 import 'package:tour_guide_metaverse/shared/helpers/helperMethods.dart';
+
+import '../../shared/styles/styles.dart';
 
 class TourismPage extends StatefulWidget {
   const TourismPage({Key? key}) : super(key: key);
@@ -14,8 +19,10 @@ class TourismPage extends StatefulWidget {
 class _TourismPageState extends State<TourismPage> {
   int index = 0;
   final _pagebottom = [
-    const HomeScreen(),
-    const ProfileScreen(),
+    HomeScreen(),
+    ExploreScreen(),
+    BookMarkScreen(),
+    ProfileScreen(),
   ];
 
   @override
@@ -30,60 +37,58 @@ class _TourismPageState extends State<TourismPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0.0,
-        title: Row(
-          children: [
-            Image.asset(
-              'assets/images/logo.png',
-              height: 50,
-              width: 50,
-            ),
-            const SizedBox(
-              width: 20.0,
-            ),
-            Text(
-              'METAPHAROH',
-              style: TextStyle(
-                fontFamily: 'Brand-Bold',
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.orange[900],
-              ),
-            ),
-          ],
-        ),
-      ),
       backgroundColor: Colors.white,
       body: _pagebottom[index],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: index,
-        elevation: 0.0,
-        backgroundColor: Colors.white,
-        iconSize: 30,
-        onTap: (value) {
-          index = value;
-          setState(() {});
-        },
-        showUnselectedLabels: false,
-        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-        selectedItemColor: Colors.orange[900],
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_outlined,
-            ),
-            label: 'HOME',
+      bottomNavigationBar: BottomAppBar(
+        color: base,
+        child: Padding(
+          padding: EdgeInsets.only(
+            bottom: 10,
+            top: 10,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person_2_outlined,
-            ),
-            label: 'PROFILE',
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              buildContainerIconButton(Icons.home_outlined, 0),
+              buildContainerIconButton(Icons.explore_outlined, 1),
+              buildContainerIconButton(Icons.bookmark_border, 2),
+              buildContainerIconButton(Icons.person_2_outlined, 3),
+            ],
           ),
-        ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildContainerIconButton(IconData iconData, int buttonIndex) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          index = buttonIndex;
+        });
+      },
+      child: Container(
+        height: 7.h,
+        width: 15.w,
+        decoration: BoxDecoration(
+          color: index == buttonIndex ? Colors.yellow : Colors.transparent,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        padding: EdgeInsets.all(10),
+        child: IconButton(
+          onPressed: () {
+            setState(() {
+              index = buttonIndex;
+            });
+          },
+          icon: Icon(
+            iconData,
+            color: index == buttonIndex ? base : Colors.white,
+            size: 30,
+          ),
+        ),
       ),
     );
   }
 }
+

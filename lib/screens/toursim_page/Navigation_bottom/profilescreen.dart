@@ -1,34 +1,38 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 import 'package:tour_guide_metaverse/screens/login_screen/login_screen2.dart';
 import 'package:tour_guide_metaverse/shared/constants/constants.dart';
 import 'package:tour_guide_metaverse/shared/data_provider/appdata.dart';
+import 'package:tour_guide_metaverse/shared/styles/styles.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              color: Colors.white,
-              padding: const EdgeInsets.all(16),
-              child: Column(
+    return SingleChildScrollView(
+      child: Container(
+        color: base,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 5.h, vertical: 20.w),
+          child: Column(
+            children: [
+              Column(
                 children: [
                   Row(
                     children: [
-                      CircleAvatar(
-                        radius: 50.0,
-                        backgroundColor: Colors.grey,
-                        child: Icon(
-                          Icons.person,
-                          size: 60.0,
-                          color: Colors.orange[900],
+                      Container(
+                        width: 14.w,
+                        height: 8.h,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/pepars.png'),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -38,17 +42,19 @@ class ProfileScreen extends StatelessWidget {
                           children: [
                             Text(
                               currentUserInfo!.fullName!,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 24,
-                                  overflow: TextOverflow.ellipsis),
+                              style: GoogleFonts.raleway(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.sp,
+                                color:
+                                    Colors.white, // Change text color to white
+                              ),
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              currentUserInfo!.email!,
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey[600],
+                              'Egypt',
+                              style: GoogleFonts.raleway(
+                                fontSize: 10.sp,
+                                color: Colors.white,
                               ),
                             ),
                           ],
@@ -74,61 +80,66 @@ class ProfileScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Column(
-                          children: [
-                            Text(
-                              (Provider.of<AppData>(context).tripHistory.length)
-                                  .toString(),
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                (Provider.of<AppData>(context)
+                                        .tripHistory
+                                        .length)
+                                    .toString(),
+                                style: GoogleFonts.raleway(
+                                    fontSize: 18.sp,
+                                    color: white,
+                                    fontWeight: FontWeight.w800),
                               ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              'Tours',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey[600],
+                              const SizedBox(height: 4),
+                              Text(
+                                'Tours',
+                                style: GoogleFonts.raleway(
+                                    fontSize: 12.sp,
+                                    color: white,
+                                    fontWeight: FontWeight.w800),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                         Column(
                           children: [
-                            const Text(
+                            Text(
                               '12',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
+                              style: GoogleFonts.raleway(
+                                  fontSize: 18.sp,
+                                  color: white,
+                                  fontWeight: FontWeight.w800),
                             ),
                             const SizedBox(height: 4),
                             Text(
                               'Reviews',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey[600],
-                              ),
+                              style: GoogleFonts.raleway(
+                                  fontSize: 12.sp,
+                                  color: white,
+                                  fontWeight: FontWeight.w800),
                             ),
                           ],
                         ),
                         Column(
                           children: [
-                            const Text(
+                            Text(
                               '3',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
+                              style: GoogleFonts.raleway(
+                                  fontSize: 18.sp,
+                                  color: white,
+                                  fontWeight: FontWeight.w800),
                             ),
                             const SizedBox(height: 4),
                             Text(
                               'Favorites',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey[600],
-                              ),
+                              style: GoogleFonts.raleway(
+                                  fontSize: 12.sp,
+                                  color: white,
+                                  fontWeight: FontWeight.w800),
                             ),
                           ],
                         ),
@@ -139,15 +150,18 @@ class ProfileScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
+                      Text(
                         'Personal Information',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
+                        style: GoogleFonts.raleway(
+                            fontSize: 18.sp,
+                            color: white,
+                            fontWeight: FontWeight.w800),
                       ),
                       IconButton(
-                        icon: const Icon(Icons.edit),
+                        icon: const Icon(
+                          Icons.edit,
+                          color: white,
+                        ),
                         onPressed: () {
                           // TODO: Implement edit button functionality.
                         },
@@ -164,10 +178,10 @@ class ProfileScreen extends StatelessWidget {
                       const SizedBox(width: 16),
                       Text(
                         currentUserInfo!.fullName!,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey[600],
-                        ),
+                        style: GoogleFonts.raleway(
+                            fontSize: 12.sp,
+                            color: white,
+                            fontWeight: FontWeight.w800),
                       ),
                     ],
                   ),
@@ -178,10 +192,10 @@ class ProfileScreen extends StatelessWidget {
                       const SizedBox(width: 16),
                       Text(
                         currentUserInfo!.email!,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey[600],
-                        ),
+                        style: GoogleFonts.raleway(
+                            fontSize: 12.sp,
+                            color: white,
+                            fontWeight: FontWeight.w800),
                       ),
                     ],
                   ),
@@ -193,8 +207,8 @@ class ProfileScreen extends StatelessWidget {
                       Text(
                         currentUserInfo!.phone!,
                         style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey[600],
+                          fontSize: 12.sp,
+                          color: white,
                         ),
                       ),
                     ],
@@ -203,15 +217,18 @@ class ProfileScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
+                      Text(
                         'Payment Methods',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
+                        style: GoogleFonts.raleway(
+                            fontSize: 18.sp,
+                            color: white,
+                            fontWeight: FontWeight.w800),
                       ),
                       IconButton(
-                        icon: const Icon(Icons.add),
+                        icon: const Icon(
+                          Icons.add,
+                          color: white,
+                        ),
                         onPressed: () {
                           // TODO: Implement add payment method button functionality.
                         },
@@ -236,31 +253,36 @@ class ProfileScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         Icon(Icons.credit_card, color: Colors.grey[600]),
-                        const SizedBox(width: 16),
+                        SizedBox(
+                          width: 16,
+                        ),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
+                              Text(
                                 'Visa ** ** ** 1234',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: GoogleFonts.raleway(
+                                    fontSize: 12.sp,
+                                    color: white,
+                                    fontWeight: FontWeight.w800),
                               ),
                               const SizedBox(height: 4),
                               Text(
                                 'Expires 12/25',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.grey[600],
-                                ),
+                                style: GoogleFonts.raleway(
+                                    fontSize: 10.sp,
+                                    color: white,
+                                    fontWeight: FontWeight.normal),
                               ),
                             ],
                           ),
                         ),
                         IconButton(
-                          icon: const Icon(Icons.delete),
+                          icon: const Icon(
+                            Icons.delete,
+                            color: white,
+                          ),
                           onPressed: () {
                             // TODO: Implement delete payment method button functionality.
                           },
@@ -270,65 +292,85 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-            const SizedBox(height: 16),
-            Container(
-              color: Colors.white,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Text(
-                      'Upcoming Tours',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
+              const SizedBox(height: 16),
+              Container(
+                color: base,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Text(
+                        'Upcoming Tours',
+                        style: GoogleFonts.raleway(
+                            fontSize: 14.sp,
+                            color: white,
+                            fontWeight: FontWeight.w800),
                       ),
                     ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      leading: const Icon(Icons.location_on),
-                      title: const Text('Tour to Pyramids'),
-                      subtitle: const Text('July 1, 2023'),
-                      trailing: const Icon(Icons.arrow_forward_ios),
-                      onTap: () {
-                        // TODO: Implement trip details screen.
-                      },
+                    Card(
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.location_on,
+                          color: Colors.grey[600],
+                        ),
+                        title: Text(
+                          'Tour to Pyramids',
+                          style: GoogleFonts.raleway(
+                            fontSize: 20,
+                            color: Colors.grey[600],
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                        subtitle: Text(
+                          'July 1, 2023',
+                          style: GoogleFonts.raleway(
+                            fontSize: 14,
+                            color: Colors.grey[600],
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        trailing: Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.grey[600],
+                        ),
+                        onTap: () {
+                          // TODO: Implement trip details screen.
+                        },
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
-            Center(
-              child: SizedBox(
-                width: 150,
-                height: 50,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.orange[900]),
-                  ),
-                  child: const Text(
-                    'Log out',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  onPressed: () {
-                    // TODO: Implement logout functionality.
-                    FirebaseAuth.instance.signOut();
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, LoginScreen2.routeName, (route) => false);
-                  },
+                  ],
                 ),
               ),
-            ),
-            const SizedBox(height: 16),
-          ],
+              const SizedBox(height: 16),
+              Center(
+                child: SizedBox(
+                  width: 150,
+                  height: 50,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          Colors.yellow.withOpacity(0.4)),
+                    ),
+                    child: Text(
+                      'Log out',
+                      style: GoogleFonts.raleway(
+                          fontSize: 10.sp,
+                          color: white,
+                          fontWeight: FontWeight.w800),
+                    ),
+                    onPressed: () {
+                      // TODO: Implement logout functionality.
+                      FirebaseAuth.instance.signOut();
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, LoginScreen2.routeName, (route) => false);
+                    },
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+            ],
+          ),
         ),
       ),
     );

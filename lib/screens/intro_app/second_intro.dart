@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tour_guide_metaverse/screens/intro_app/third_intro.dart';
-import 'package:tour_guide_metaverse/shared/styles/styles.dart';
 
 class SecondIntro extends StatelessWidget {
   const SecondIntro({Key? key}) : super(key: key);
@@ -24,13 +24,13 @@ class SecondIntro extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 30, bottom: 20, right: 20),
                 child: Container(
                   width: 450,
-                  child: const Column(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Discover a limitless digital adventure.',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                        style: GoogleFonts.raleway(
+                          fontWeight: FontWeight.w800,
                           fontSize: 30,
                           color: Colors.white,
                         ),
@@ -40,10 +40,10 @@ class SecondIntro extends StatelessWidget {
                       ),
                       Text(
                         'Metaverse.',
-                        style: TextStyle(
+                        style: GoogleFonts.raleway(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
-                          color: Colors.white,
+                          color: Colors.grey,
                         ),
                       ),
                     ],
@@ -56,8 +56,8 @@ class SecondIntro extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 30, bottom: 50, left: 20),
                 child: SizedBox(
-                  height: 65,
-                  width: 100,
+                  height: 45,
+                  width: 80,
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamedAndRemoveUntil(
@@ -68,8 +68,8 @@ class SecondIntro extends StatelessWidget {
                     ),
                     child: const Icon(
                       Icons.arrow_forward,
-                      size: 35,
-                      color: base,
+                      size: 25,
+                      color: Colors.black,
                       weight: 100,
                     ),
                   ),

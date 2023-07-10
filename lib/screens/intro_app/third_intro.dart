@@ -26,13 +26,13 @@ class ThirdIntro extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 30, bottom: 20, right: 20),
                 child: Container(
                   width: 450,
-                  child: const Column(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Get ready to explore the world\'s most fascinating destinations.',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                        style: GoogleFonts.raleway(
+                          fontWeight: FontWeight.w800,
                           fontSize: 30,
                           color: Colors.white,
                         ),
@@ -42,10 +42,10 @@ class ThirdIntro extends StatelessWidget {
                       ),
                       Text(
                         'an expert tour guide by your side.',
-                        style: TextStyle(
+                        style: GoogleFonts.raleway(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
-                          color: Colors.white,
+                          color: Colors.grey,
                         ),
                       ),
                     ],
@@ -58,7 +58,7 @@ class ThirdIntro extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 30, bottom: 50, left: 20),
                 child: SizedBox(
-                  height: 65,
+                  height: 50,
                   width: 100,
                   child: ElevatedButton(
                     onPressed: () {
@@ -71,7 +71,7 @@ class ThirdIntro extends StatelessWidget {
                     child: Text(
                       'Sign Up',
                       style: GoogleFonts.raleway(
-                        fontSize: 12.sp,
+                        fontSize: 10.sp,
                         color: base,
                         fontWeight: FontWeight.bold,
                       ),

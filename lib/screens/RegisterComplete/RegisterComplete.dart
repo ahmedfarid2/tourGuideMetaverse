@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:im_animations/im_animations.dart';
@@ -11,8 +13,15 @@ class RegisterComplete extends StatefulWidget {
   static const String routeName = "RegisterComplete";
 
   final Destination destination;
+  final File? image;
+  final String username;
 
-  RegisterComplete({Key? key, required this.destination}) : super(key: key);
+  RegisterComplete({
+    Key? key,
+    required this.destination,
+    this.image,
+    this.username = "",
+  }) : super(key: key);
 
   @override
   State<RegisterComplete> createState() => _RegisterCompleteState();
@@ -39,7 +48,7 @@ class _RegisterCompleteState extends State<RegisterComplete> {
               children: [
                 Container(
                   width: double.infinity,
-                  height: 40.h,
+                  height: 36.h,
                   child: ClipRRect(
                     borderRadius: BorderRadius.only(
                       bottomRight: Radius.circular(15.sp),
@@ -103,11 +112,7 @@ class _RegisterCompleteState extends State<RegisterComplete> {
                     ),
                     child: Row(
                       children: [
-                        Icon(
-                          Icons.location_on,
-                          color: white,
-                          size: 8.sp,
-                        ),
+                        Icon(Icons.location_on, color: white, size: 8.sp),
                         SizedBox(width: 1.w),
                         Text(
                           'Luxor Egypt',
@@ -137,17 +142,12 @@ class _RegisterCompleteState extends State<RegisterComplete> {
                       Container(
                         margin: const EdgeInsets.all(5.0),
                         child: ColorSonar(
-                          //contentAreaColor: Colors.yellow,
-                          //innerWaveColor: Colors.yellow,
                           middleWaveColor: Colors.yellow.withOpacity(0.25),
                           outerWaveColor: Colors.yellow.withOpacity(0.15),
-                          // wavesDisabled: true,
-                          // waveMotion: WaveMotion.synced,
                           contentAreaRadius: 30.0.sp,
                           waveFall: 12.5.sp,
-                          // waveMotionEffect: Curves.elasticIn,
+                          duration: Duration(seconds: 1),
                           waveMotion: WaveMotion.synced,
-                          //duration: Duration(seconds: 3),
                           child: Container(
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
@@ -158,9 +158,15 @@ class _RegisterCompleteState extends State<RegisterComplete> {
                             ),
                             child: CircleAvatar(
                               radius: 42.0.sp,
-                              backgroundImage:
-                                  const AssetImage('assets/images/intro2.jpg'),
-                              //مفروض هنا الاميج اللي اليوزر هيحطها
+                              backgroundColor: Colors.white,
+                              child: ClipOval(
+                                child: SizedBox(
+                                    width: 84.sp,
+                                    height: 84.sp,
+                                    child: Image.asset(
+                                        'assets/images/pepars.png',
+                                        fit: BoxFit.cover)),
+                              ),
                             ),
                           ),
                         ),
@@ -172,8 +178,7 @@ class _RegisterCompleteState extends State<RegisterComplete> {
                   height: 0.5.h,
                 ),
                 Text(
-                  'pepars',
-                  // هنا اسمه
+                  widget.username,
                   style: GoogleFonts.raleway(
                     fontSize: 15.sp,
                     fontWeight: FontWeight.w900,
@@ -182,7 +187,7 @@ class _RegisterCompleteState extends State<RegisterComplete> {
                   maxLines: 2,
                 ),
                 SizedBox(
-                  height: 20.h,
+                  height: 23.h,
                 ),
                 CustomizedButton(
                   buttonText: "Explore Home",
